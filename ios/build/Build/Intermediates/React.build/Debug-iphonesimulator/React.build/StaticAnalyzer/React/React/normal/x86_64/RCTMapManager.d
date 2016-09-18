@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTMapManager.m \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTMapManager.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTViewManager.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/CSSLayout/CSSLayout.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/CSSLayout/CSSMacros.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/UIView+React.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTComponent.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTConvert+CoreLocation.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTConvert+MapKit.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTMap.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTMapAnnotation.h \
+  /Users/walkersmith/Repositories/roku-remote/node_modules/react-native/React/Views/RCTMapOverlay.h

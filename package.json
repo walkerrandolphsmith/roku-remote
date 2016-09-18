@@ -4,9 +4,11 @@
   "description": "A remote for the Roku",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
-  "keywords": ["roku"],
+  "keywords": [
+    "roku"
+  ],
   "author": "walkerrandolphsmith@gmail.com",
   "contributors": [
     "walkerrandolphsmith@gmail.com",
@@ -14,6 +16,8 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.14.0"
+    "axios": "^0.14.0",
+    "react": "15.3.1",
+    "react-native": "0.33.0"
   }
 }
