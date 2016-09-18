@@ -11,4 +11,4 @@ const query = new Buffer(
     \r\n`
 );
 
-module.exports = socket => send(query, 0, query.length, ssdpPort, ssdpAddress);
+module.exports = (socket, cb) => socket.send(query, 0, query.length, ssdpPort, ssdpAddress, cb);
