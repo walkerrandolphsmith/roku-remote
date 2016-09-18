@@ -1,0 +1,22 @@
+{
+  "name": "roku-remote",
+  "version": "1.0.0",
+  "description": "A remote for the Roku",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["roku"],
+  "author": "walkerrandolphsmith@gmail.com",
+  "contributors": [
+    "walkerrandolphsmith@gmail.com",
+    "tbenny001@gmail.com"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.14.0",
+    "roku": "^0.2.0",
+    "xml2js": "^0.4.17",
+    "xml2json": "^0.10.0"
+  }
+}
