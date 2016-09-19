@@ -9,8 +9,8 @@ export default class UpButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl, keys } = roku();
-        this.handler(baseUrl, keys.UP);
+        const { baseUrl } = roku();
+        this.handler(baseUrl, this.props.UP);
     };
 
     render(){
@@ -20,7 +20,7 @@ export default class UpButton extends AbstractButton {
             <Button
                 style={style}
                 styleDisabled={disabledStyle}
-                onPress={this.childHandler}>
+                onPress={this.childHandler.bind(this)}>
                 {label}
             </Button>
         );

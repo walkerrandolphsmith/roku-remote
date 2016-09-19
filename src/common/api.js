@@ -8,7 +8,7 @@ const roku = (host = HOST, port = PORT, protocol = PROTOCOL) => {
     const baseUrl = `${protocol}://${host}:${port}`;
     return {
         baseUrl: baseUrl,
-        keys: require('./keys')
+        keys: {}
     }
 };
 

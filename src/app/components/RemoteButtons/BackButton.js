@@ -9,8 +9,8 @@ export default class BackButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl, keys } = roku();
-        this.handler(baseUrl, keys.BACK);
+        const { baseUrl } = roku();
+        this.handler(baseUrl, this.props.BACK);
     };
 
     render(){
@@ -20,7 +20,7 @@ export default class BackButton extends AbstractButton {
             <Button
                 style={style}
                 styleDisabled={disabledStyle}
-                onPress={this.childHandler}>
+                onPress={this.childHandler.bind(this)}>
                 {label}
             </Button>
         );

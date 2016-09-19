@@ -2,9 +2,13 @@ import React from 'react';
 import Button from 'react-native-button';
 import AbstractButton from './AbstractButton';
 
-export default class UpButton extends AbstractButton {
+export default class AsteriskButton extends AbstractButton {
     static defaultProps = {
         label: '*'
+    };
+
+    childHandler = () => {
+
     };
 
     render(){
@@ -14,7 +18,7 @@ export default class UpButton extends AbstractButton {
             <Button
                 style={style}
                 styleDisabled={disabledStyle}
-                onPress={this.handler}>
+                onPress={this.childHandler.bind(this)}>
                 {label}
             </Button>
         );

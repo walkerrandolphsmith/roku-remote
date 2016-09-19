@@ -3,14 +3,14 @@ import Button from 'react-native-button';
 import AbstractButton from './AbstractButton';
 import roku from './../../../common/api';
 
-export default class UpButton extends AbstractButton {
+export default class RightButton extends AbstractButton {
     static defaultProps = {
         label: 'Right'
     };
 
     childHandler = () => {
-        const { baseUrl, keys } = roku();
-        this.handler(baseUrl, keys.RIGHT);
+        const { baseUrl } = roku();
+        this.handler(baseUrl, this.props.RIGHT);
     };
 
     render(){
@@ -20,7 +20,7 @@ export default class UpButton extends AbstractButton {
             <Button
                 style={style}
                 styleDisabled={disabledStyle}
-                onPress={this.childHandler}>
+                onPress={this.childHandler.bind(this)}>
                 {label}
             </Button>
         );

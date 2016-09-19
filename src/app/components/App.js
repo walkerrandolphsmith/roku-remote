@@ -45,6 +45,7 @@ class _App extends React.Component {
 
 
     render(){
+        const { keys } = this.props.atom;
         const rokuUrls = this.props.atom.rokus.map(url => <Text key={url}>{url}</Text>);
         return (
             <View style={styles.container}>
@@ -59,15 +60,15 @@ class _App extends React.Component {
                     Cmd+D or shake for dev menu
                 </Text>
                 {rokuUrls}
-                <HomeButton />
-                <BackButton />
-                <DownButton />
-                <UpButton />
-                <LeftButton />
-                <RightButton />
-                <OkButton />
-                <SearchButton />
-                <AsteriskButton />
+                <HomeButton { ...keys} />
+                <BackButton { ...keys} />
+                <DownButton { ...keys} />
+                <UpButton { ...keys} />
+                <LeftButton { ...keys} />
+                <RightButton { ...keys} />
+                <OkButton { ...keys} />
+                <SearchButton { ...keys} />
+                <AsteriskButton { ...keys} />
             </View>
         );
     }
