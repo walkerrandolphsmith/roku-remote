@@ -9,8 +9,7 @@ export default class UpButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.UP);
+        this.handler(this.props.UP);
     };
 
     render(){

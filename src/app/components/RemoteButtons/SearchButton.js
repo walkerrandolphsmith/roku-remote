@@ -9,8 +9,7 @@ export default class SearchButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.SEARCH);
+        this.handler(this.props.SEARCH);
     };
 
     render(){

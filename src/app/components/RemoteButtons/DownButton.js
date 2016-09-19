@@ -9,8 +9,7 @@ export default class DownButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.DOWN);
+        this.handler(this.props.DOWN);
     };
 
     render(){

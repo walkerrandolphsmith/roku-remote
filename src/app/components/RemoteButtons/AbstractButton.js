@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class HomeButton extends React.Component {
+export default class AbstractButton extends React.Component {
 
     static defaultProps = {
         label: 'Button',
@@ -20,18 +20,8 @@ export default class HomeButton extends React.Component {
         loading: false
     };
 
-    handler = (baseUrl, key) => {
-        this.setState({ loading: true });
-        fetch(`${baseUrl}/keypress/${key}`, {
-            method: 'POST'
-        }).then((res) => {
-            res.text().then(xmlString => {
-
-            });
-            this.setState({ loading: false });
-        }).catch(err => {
-            console.log('err', err);
-        });
+    handler = (key) => {
+        this.props.keyPress(key);
     };
 
     getLabel = () => {

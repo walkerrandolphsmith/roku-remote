@@ -9,8 +9,7 @@ export default class RightButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.RIGHT);
+        this.handler(this.props.RIGHT);
     };
 
     render(){

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import {StyleSheet, Text, View} from 'react-native';
-import { actions } from './../../common/modules';
+import { actions, selectors } from './../../common/modules';
 
 import {
     AsteriskButton,
@@ -56,15 +56,15 @@ class _App extends React.Component {
                 </Text>*/}
                 <Text>selected: {selectedDevice.url}</Text>
                 {rokuUrls}
-                <HomeButton { ...keys} />
-                <BackButton { ...keys} />
-                <DownButton { ...keys} />
-                <UpButton { ...keys} />
-                <LeftButton { ...keys} />
-                <RightButton { ...keys} />
-                <OkButton { ...keys} />
-                <SearchButton { ...keys} />
-                <AsteriskButton { ...keys} />
+                <HomeButton keyPress={keyPress} { ...keys} />
+                <BackButton keyPress={keyPress} { ...keys} />
+                <DownButton keyPress={keyPress} { ...keys} />
+                <UpButton keyPress={keyPress} { ...keys} />
+                <LeftButton keyPress={keyPress} { ...keys} />
+                <RightButton keyPress={keyPress} { ...keys} />
+                <OkButton keyPress={keyPress} { ...keys} />
+                <SearchButton keyPress={keyPress} { ...keys} />
+                <AsteriskButton keyPress={keyPress} { ...keys} />
             </View>
         );
     }

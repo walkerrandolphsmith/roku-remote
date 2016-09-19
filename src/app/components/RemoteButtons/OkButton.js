@@ -9,8 +9,7 @@ export default class OkButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.SELECT);
+        this.handler(this.props.SELECT);
     };
 
     render(){

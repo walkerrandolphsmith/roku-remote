@@ -9,8 +9,7 @@ export default class LeftButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.LEFT);
+        this.handler(this.props.LEFT);
     };
 
     render(){

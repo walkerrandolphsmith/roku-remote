@@ -9,8 +9,7 @@ export default class HomeButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.HOME);
+        this.handler(this.props.HOME);
     };
 
     render(){

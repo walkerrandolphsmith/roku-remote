@@ -9,8 +9,7 @@ export default class BackButton extends AbstractButton {
     };
 
     childHandler = () => {
-        const { baseUrl } = roku();
-        this.handler(baseUrl, this.props.BACK);
+        this.handler(this.props.BACK);
     };
 
     render(){
