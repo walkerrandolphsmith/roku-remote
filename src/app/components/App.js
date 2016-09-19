@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import broadcastSsdp from './../../common/broadcastSsdp';
 import {
     AsteriskButton,
     BackButton,
@@ -31,6 +32,14 @@ let styles = StyleSheet.create({
 });
 
 export default class App extends React.Component {
+
+    constructor(props, context) {
+        super(props, context);
+
+        broadcastSsdp();
+    }
+
+
     render(){
         return (
             <View style={styles.container}>
