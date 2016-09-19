@@ -1,9 +1,12 @@
 export { default as AsteriskButton } from './AsteriskButton';
 export { default as BackButton } from './BackButton';
 export { default as DownButton } from './DownButton';
+export { default as FastForwardButton } from './FastForwardButton';
 export { default as HomeButton } from './HomeButton';
 export { default as LeftButton } from './LeftButton';
 export { default as OkButton } from './OkButton';
+export { default as PlayButton } from './PlayButton';
+export { default as RewindButton } from './RewindButton';
 export { default as RightButton } from './RightButton';
 export { default as SearchButton } from './SearchButton';
 export { default as UpButton } from './UpButton';

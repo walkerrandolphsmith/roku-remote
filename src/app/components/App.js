@@ -13,7 +13,10 @@ import {
     OkButton,
     RightButton,
     SearchButton,
-    UpButton
+    UpButton,
+    FastForwardButton,
+    RewindButton,
+    PlayButton
 } from './RemoteButtons';
 
 let styles = StyleSheet.create({
@@ -57,6 +60,9 @@ class _App extends React.Component {
                 <Text>selected: {selectedDevice.url}</Text>
                 {rokuUrls}
                 <HomeButton keyPress={keyPress} { ...keys} />
+                <RewindButton keyPress={keyPress} { ...keys} />
+                <FastForwardButton keyPress={keyPress} { ...keys} />
+                <PlayButton keyPress={keyPress} { ...keys} />
                 <BackButton keyPress={keyPress} { ...keys} />
                 <DownButton keyPress={keyPress} { ...keys} />
                 <UpButton keyPress={keyPress} { ...keys} />
