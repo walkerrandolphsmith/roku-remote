@@ -5,4 +5,9 @@
 	<key>WorkspacePath</key>
 	<string>/Users/walkersmith/Repositories/roku-remote/ios/roku.xcodeproj</string>
 </dict>
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
 </plist>
