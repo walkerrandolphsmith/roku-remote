@@ -20,9 +20,18 @@ export default class HomeButton extends React.Component {
         loading: false
     };
 
-    handler = () => {
+    handler = (baseUrl, key) => {
         this.setState({ loading: true });
-        setTimeout(() => this.setState({ loading: false }), 500);
+        fetch(`${baseUrl}/keypress/${key}`, {
+            method: 'POST'
+        }).then((res) => {
+            res.text().then(xmlString => {
+
+            });
+            this.setState({ loading: false });
+        }).catch(err => {
+            console.log('err', err);
+        });
     };
 
     getLabel = () => {

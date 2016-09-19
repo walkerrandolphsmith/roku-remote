@@ -8,17 +8,9 @@ export default class UpButton extends AbstractButton {
         label: 'Search'
     };
 
-    handler = () => {
+    childHandler = () => {
         const { baseUrl, keys } = roku();
-        fetch(`${baseUrl}/keypress/${keys.SEARCH}`, {
-            method: 'POST'
-        }).then((res) => {
-            res.text().then(xmlString => {
-
-            });
-        }).catch(err => {
-            console.log('err', err);
-        });
+        this.handler(baseUrl, keys.SEARCH);
     };
 
     render(){
@@ -28,7 +20,7 @@ export default class UpButton extends AbstractButton {
             <Button
                 style={style}
                 styleDisabled={disabledStyle}
-                onPress={this.handler}>
+                onPress={this.childHandler}>
                 {label}
             </Button>
         );
