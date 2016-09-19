@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import {StyleSheet, Text, View} from 'react-native';
-import * as actions from './../../common/modules';
+import { actions } from './../../common/modules';
 
 import {
     AsteriskButton,
@@ -45,20 +45,16 @@ class _App extends React.Component {
 
 
     render(){
-        const { keys } = this.props.atom;
-        const rokuUrls = this.props.atom.rokus.map(device => <Text key={device.url}>{device.url}</Text>);
+        const { keys, rokus } = this.props.atom;
+        const { selectedDevice, keyPress } = this.props;
+        const rokuUrls = rokus.map(device => <Text key={device.url}>{device.url}</Text>);
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to React Native!!!!!!!
-                </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit Component
-                </Text>
-                <Text style={styles.instructions}>
+                {/*<Text style={styles.instructions}>
                     Press Cmd+R to reload,{'\n'}
                     Cmd+D or shake for dev menu
-                </Text>
+                </Text>*/}
+                <Text>selected: {selectedDevice.url}</Text>
                 {rokuUrls}
                 <HomeButton { ...keys} />
                 <BackButton { ...keys} />
@@ -75,7 +71,8 @@ class _App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return state;
+    const selectedDevice = selectors.getSelectedDevice(state);
+    return { ...state, selectedDevice };
 };
 
 const mapDispatchToProps = (dispatch) => {

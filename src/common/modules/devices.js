@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-
+import { createSelector } from 'reselect';
 const ACTION = 'GET_ROKU_DEVICES';
 
 const success = createAction(
@@ -18,6 +18,14 @@ const reducer = (state, payload) => {
     state.rokus = rokuDevices;
     return { ...state };
 };
+
+const rokusSelector = (state) => state.atom.rokus;
+const selectedDeviceSelector = (state) => state.atom.selectedDevice;
+
+export const getSelectedDevice = createSelector(
+    [rokusSelector, selectedDeviceSelector],
+    (rokus, selectedDevice) => rokus.find(roku => roku.url === selectedDevice) || {}
+);
 
 export default {
     [ACTION]: reducer
