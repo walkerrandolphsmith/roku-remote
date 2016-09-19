@@ -6,7 +6,9 @@ const handlers = [
 ].reduce((output, handler) => Object.assign(output, handler), {});
 
 const DEFAULT_STATE = {
-    rokus: [],
+    rokus: [
+        { url: 'http://10.0.0.8:8060/' }
+    ],
     keys: keys
 };
 

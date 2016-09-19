@@ -46,7 +46,7 @@ class _App extends React.Component {
 
     render(){
         const { keys } = this.props.atom;
-        const rokuUrls = this.props.atom.rokus.map(url => <Text key={url}>{url}</Text>);
+        const rokuUrls = this.props.atom.rokus.map(device => <Text key={device.url}>{device.url}</Text>);
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>

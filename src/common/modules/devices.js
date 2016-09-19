@@ -4,17 +4,18 @@ const ACTION = 'GET_ROKU_DEVICES';
 
 const success = createAction(
     ACTION,
-    (rokus) => ({ rokus })
+    (rokuUrls) => ({ rokuUrls })
 );
 
 export const getRokuDevices = () => (dispatch, getState) => {
-    broadcastSsdp().then((rokuDevices) => {
-        dispatch(success(rokuDevices));
+    broadcastSsdp().then((rokuUrls) => {
+        dispatch(success(rokuUrls));
     });
 };
 
 const reducer = (state, payload) => {
-    state.rokus = payload.rokus;
+    const rokuDevices = payload.rokuUrls.map(url => ({ url: url }));
+    state.rokus = rokuDevices;
     return { ...state };
 };
 
