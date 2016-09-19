@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import {StyleSheet, Text, View} from 'react-native';
-import broadcastSsdp from './../../common/broadcastSsdp';
+import * as actions from './../../common/modules';
+
 import {
     AsteriskButton,
     BackButton,
@@ -31,21 +34,18 @@ let styles = StyleSheet.create({
     }
 });
 
-export default class App extends React.Component {
+class _App extends React.Component {
     state = {
         rokuUrls: []
     };
 
     componentDidMount() {
-        broadcastSsdp().then(rokuUrls => {
-            const uniqueUrls = [...new Set(this.state.rokuUrls.concat(rokuUrls))];
-            this.setState({ rokuUrls:  uniqueUrls });
-        });
+        this.props.getRokuDevices();
     }
 
 
     render(){
-        const rokuUrls = this.state.rokuUrls.map(url => <Text key={url}>{url}</Text>);
+        const rokuUrls = this.props.atom.rokus.map(url => <Text key={url}>{url}</Text>);
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
@@ -72,3 +72,13 @@ export default class App extends React.Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(actions, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(_App);

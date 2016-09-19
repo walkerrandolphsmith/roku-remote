@@ -1,4 +1,4 @@
 import {AppRegistry} from 'react-native';
-import App from './src/app/components/App';
+import Main from './src/Main';
 
-AppRegistry.registerComponent('roku', () => App);
+AppRegistry.registerComponent('roku', () => Main);
