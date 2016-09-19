@@ -34,6 +34,11 @@ module.exports = () => {
 
 	client.on('message', (msg, rinfo) => {
 		console.log(`server received: ${msg}`);
+		const matches = msg.toString().match(/Location: (.*)/i);
+		if(matches) {
+			const rokuUrl = matches[1];
+			console.log(rokuUrl);
+		}
 	});
 
 };
