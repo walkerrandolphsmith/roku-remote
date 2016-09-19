@@ -32,15 +32,20 @@ let styles = StyleSheet.create({
 });
 
 export default class App extends React.Component {
+    state = {
+        rokuUrls: []
+    };
 
-    constructor(props, context) {
-        super(props, context);
-
-        broadcastSsdp();
+    componentDidMount() {
+        broadcastSsdp().then(rokuUrls => {
+            const uniqueUrls = [...new Set(this.state.rokuUrls.concat(rokuUrls))];
+            this.setState({ rokuUrls:  uniqueUrls });
+        });
     }
 
 
     render(){
+        const rokuUrls = this.state.rokuUrls.map(url => <Text key={url}>{url}</Text>);
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
@@ -53,7 +58,7 @@ export default class App extends React.Component {
                     Press Cmd+R to reload,{'\n'}
                     Cmd+D or shake for dev menu
                 </Text>
-
+                {rokuUrls}
                 <HomeButton />
                 <BackButton />
                 <DownButton />

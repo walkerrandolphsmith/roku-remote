@@ -13,8 +13,9 @@ const query = new Buffer(queryString);
 const broadcastSsdp = (socket, cb) => socket.send(query, 0, query.length, ssdpPort, ssdpAddress, cb);
 
 
-module.exports = () => {
+module.exports = (callback) => new Promise((resolve, reject) => {
 	const client = dgram.createSocket('udp4');
+	const rokuUrls = [];
 
 	client.bind(12345);
 
@@ -24,12 +25,13 @@ module.exports = () => {
 		broadcastSsdp(client, (err) => {
 			if(err) console.log(err);
 			else console.log('broadcasted');
-			//setTimeout(() => { client.close(); }, 2000);
+			setTimeout(() => { client.close(); }, 3000);
 		});
 	});
 
 	client.on('error', (err) => {
 		console.log("client had an error", err);
+		reject(err);
 	});
 
 	client.on('message', (msg, rinfo) => {
@@ -38,7 +40,12 @@ module.exports = () => {
 		if(matches) {
 			const rokuUrl = matches[1];
 			console.log(rokuUrl);
+			rokuUrls.push(rokuUrl);
 		}
 	});
 
-};
+	client.on('close', () => {
+		console.log("socket is closed");
+		resolve(rokuUrls);
+	})
+});
