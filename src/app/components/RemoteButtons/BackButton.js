@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from 'react-native-button';
 import AbstractButton from './AbstractButton';
+import Button from 'react-native-button';
 
-export default class HomeButton extends AbstractButton {
+export default class BackButton extends AbstractButton {
     static defaultProps = {
-        label: 'Home'
+        label: 'Back'
     };
 
     render(){

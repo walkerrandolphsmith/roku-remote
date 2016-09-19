@@ -1,6 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import { HomeButton } from './RemoteButtons';
+import {
+    AsteriskButton,
+    BackButton,
+    DownButton,
+    HomeButton,
+    LeftButton,
+    OkButton,
+    RightButton,
+    SearchButton,
+    UpButton
+} from './RemoteButtons';
 
 let styles = StyleSheet.create({
     container: {
@@ -34,7 +44,16 @@ export default class App extends React.Component {
                     Press Cmd+R to reload,{'\n'}
                     Cmd+D or shake for dev menu
                 </Text>
+
                 <HomeButton />
+                <BackButton />
+                <DownButton />
+                <UpButton />
+                <LeftButton />
+                <RightButton />
+                <OkButton />
+                <SearchButton />
+                <AsteriskButton />
             </View>
         );
     }
