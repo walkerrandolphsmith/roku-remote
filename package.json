@@ -4,7 +4,7 @@
   "description": "A remote for the Roku",
   "main": "index.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "test": "jest"
   },
   "keywords": [
     "roku"
@@ -28,5 +28,18 @@
     "redux-thunk": "2.1.0",
     "reselect": "^2.0.1",
     "xmldom": "^0.1.22"
+  },
+  "devDependencies": {
+    "babel-jest": "^15.0.0",
+    "babel-preset-react-native": "^1.9.0",
+    "jest": "^15.1.1",
+    "jest-react-native": "^15.0.0",
+    "react-test-renderer": "^15.3.2"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "babel": {
+    "presets": ["react-native"]
   }
 }

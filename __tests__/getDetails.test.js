@@ -49,3 +49,9 @@ const deviceInfoResponse = `
     <headphones-connected>false</headphones-connected>
 </device-info>
 `;
+
+describe('getDetails', () => {
+    it('TODO write tests', () => {
+        expect(true).toEqual(true);
+    });
+});
