@@ -14,7 +14,8 @@ const DEFAULT_STATE = {
         { url: 'http://10.0.0.8:8060/' }
     ],
     selectedDevice: 'http://10.0.0.8:8060/',
-    keys: keys
+    keys: keys,
+    channels: []
 };
 
 export default (state = DEFAULT_STATE, action = {}) => {

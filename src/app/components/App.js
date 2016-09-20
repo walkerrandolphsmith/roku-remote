@@ -56,9 +56,10 @@ class _App extends React.Component {
 
 
     render(){
-        const { keys, rokus } = this.props.atom;
+        const { keys, rokus, channels } = this.props.atom;
         const { selectedDeviceHydrated, keyPress } = this.props;
         const rokuUrls = rokus.map(device => <Text key={device.url}>{device.url}</Text>);
+        const channelList = channels.map(channel => <Text key={channel.id}>{channel.id} {channel.name}</Text>);
         return (
             <View style={styles.container}>
                 {/*<Text style={styles.instructions}>
@@ -67,6 +68,7 @@ class _App extends React.Component {
                 </Text>*/}
                 <Text>selected: {selectedDeviceHydrated.url}</Text>
                 {rokuUrls}
+                {channelList}
                 <HomeButton keyPress={keyPress} { ...keys} />
                 <RewindButton keyPress={keyPress} { ...keys} />
                 <FastForwardButton keyPress={keyPress} { ...keys} />
