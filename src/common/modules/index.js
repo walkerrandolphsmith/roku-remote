@@ -1,9 +1,12 @@
 import keys from './../constants/keys';
 import devices, { getRokuDevices, getSelectedDevice } from './devices';
 import keypress, { keyPress } from './keypress';
+import getDetails, { getRokuDetails } from './getDetails';
+
 const handlers = [
     devices,
-    keypress
+    keypress,
+    getDetails
 ].reduce((output, handler) => Object.assign(output, handler), {});
 
 const DEFAULT_STATE = {
@@ -21,7 +24,8 @@ export default (state = DEFAULT_STATE, action = {}) => {
 
 export const actions = {
     getRokuDevices,
-    keyPress
+    keyPress,
+    getRokuDetails
 };
 
 export const selectors = {

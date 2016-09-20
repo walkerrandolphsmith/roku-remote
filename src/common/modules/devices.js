@@ -8,7 +8,7 @@ const success = createAction(
 );
 
 export const getRokuDevices = () => (dispatch, getState) => {
-    broadcastSsdp().then((rokuUrls) => {
+    return broadcastSsdp().then((rokuUrls) => {
         dispatch(success(rokuUrls));
     });
 };
@@ -51,7 +51,7 @@ const broadcastSsdp = () => new Promise((resolve, reject) => {
     client.once('listening', () => {
         broadcastSsdp(client, (err) => {
             if(err) reject(err);
-            setTimeout(() => { client.close(); }, 3000);
+            setTimeout(() => { client.close(); }, 5000);
         });
     });
 

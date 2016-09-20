@@ -44,12 +44,20 @@ class _App extends React.Component {
 
     componentDidMount() {
         this.props.getRokuDevices();
+        this.props.getRokuDetails();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.selectedDevice !== nextProps.selectedDevice) {
+            this.props.getRokuDetails();
+            debugger;
+        }
     }
 
 
     render(){
         const { keys, rokus } = this.props.atom;
-        const { selectedDevice, keyPress } = this.props;
+        const { selectedDeviceHydrated, keyPress } = this.props;
         const rokuUrls = rokus.map(device => <Text key={device.url}>{device.url}</Text>);
         return (
             <View style={styles.container}>
@@ -57,7 +65,7 @@ class _App extends React.Component {
                     Press Cmd+R to reload,{'\n'}
                     Cmd+D or shake for dev menu
                 </Text>*/}
-                <Text>selected: {selectedDevice.url}</Text>
+                <Text>selected: {selectedDeviceHydrated.url}</Text>
                 {rokuUrls}
                 <HomeButton keyPress={keyPress} { ...keys} />
                 <RewindButton keyPress={keyPress} { ...keys} />
@@ -77,8 +85,8 @@ class _App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const selectedDevice = selectors.getSelectedDevice(state);
-    return { ...state, selectedDevice };
+    const selectedDeviceHydrated = selectors.getSelectedDevice(state);
+    return { ...state, selectedDeviceHydrated };
 };
 
 const mapDispatchToProps = (dispatch) => {
