@@ -20,19 +20,19 @@ export const getRokuDetails = () => (dispatch, getState) => {
     const appsUrl = `${url}query/apps`;
     const deviceInfoUrl = `${url}query/device-info`;
 
-    return fetch(appsUrl, {
+    fetch(appsUrl, {
         method: 'GET'
     }).then((res) => {
         res.text().then(xml => {
             dispatch(setApps(xml));
         });
-    }).then(() => {
-        return fetch(deviceInfoUrl, {
-            method: 'GET'
-        }).then((res) => {
-            res.text().then(xml => {
-                dispatch(setInfo(xml));
-            });
+    });
+
+    fetch(deviceInfoUrl, {
+        method: 'GET'
+    }).then((res) => {
+        res.text().then(xml => {
+            dispatch(setInfo(xml));
         });
     });
 };
