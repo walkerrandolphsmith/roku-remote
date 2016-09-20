@@ -15,6 +15,26 @@ const setInfo = createAction(
     (xml) => ({ xml })
 );
 
+const SET_APP_ICON = 'SET_APP_ICON';
+
+const setAppIcon = createAction(
+    SET_APP_ICON,
+    (id, icon) => ({ id, icon })
+);
+
+export const getChannelIcons = () => (dispatch, getState) => {
+    const channels = getState().atom.channels;
+    const url = getState().atom.rokus[0].url;
+    channels.forEach(channel => {
+        fetch(`${url}query/icon/${channel.id}`, {
+            method: 'GET'
+        }).then(res => {
+            //react-native-fetch-blob
+            dispatch(setAppIcon(channel.id, 'icon'));
+        });
+    })
+};
+
 export const getRokuDetails = () => (dispatch, getState) => {
     const url = getState().atom.rokus[0].url;
     const appsUrl = `${url}query/apps`;
@@ -25,6 +45,7 @@ export const getRokuDetails = () => (dispatch, getState) => {
     }).then((res) => {
         res.text().then(xml => {
             dispatch(setApps(xml));
+            dispatch(getChannelIcons());
         });
     });
 
@@ -61,7 +82,15 @@ const setInfoReducer = (state, payload) => {
     return { ...state };
 };
 
+setAppIconReducer = (state, payload) => {
+    const { id, icon } = payload;
+    const channelToUpdate = state.channels.find(channel => channel.id === id);
+    //channelToUpdate.icon = icon;
+    return { ...state };
+};
+
 export default {
     [SET_APPS]: setAppsReducer,
-    [SET_INFO]: setInfoReducer
+    [SET_INFO]: setInfoReducer,
+    [SET_APP_ICON]: setAppIconReducer
 };
