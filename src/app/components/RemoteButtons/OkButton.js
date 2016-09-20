@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'react-native-button';
-import AbstractButton from './AbstractButton';
-import roku from './../../../common/api'; 
+import AbstractButton from './AbstractButton'; 
 
 export default class OkButton extends AbstractButton {
     static defaultProps = {
