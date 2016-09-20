@@ -23,6 +23,22 @@ export const getDeviceInfo = () => (dispatch, getState) => {
 
 export const reducer = (state, payload) => {
     const { xml } = payload;
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xml);
+    const specs = xmlDoc.getElementsByTagName('device-info')[0].childNodes;
+    const onlyElements = [];
+    for(let i = 0; i < specs.length; i++) {
+        if(specs[i].tagName) {
+            onlyElements.push(specs[i]);
+        }
+    }
+
+    const deviceInfo = onlyElements.reduce((deviceInfo, node) => {
+        deviceInfo[node.tagName] = node.childNodes[0].data;
+        return deviceInfo
+    }, {});
+
+    state.deviceInfo = deviceInfo;
     return { ...state };
 };
 

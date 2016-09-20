@@ -10,20 +10,20 @@ describe('getDeviceInfo', () => {
 <device-info>
     <udn>29a40003-6807-10ef-800f-000000000000</udn>
     <serial-number>YY003J519951</serial-number>
-<device-info>`;
+</device-info>`;
 
-        state = { channels: undefined };
+        state = { deviceInfo: undefined };
         payload = { xml: xml }
     });
 
     it('should parse the device info into key value pairs and set the states deviceInfo ', () => {
         const expected = {
-            deviceInfo: [
-                { key: 'udn', value: '29a40003-6807-10ef-800f-000000000000' },
-                { key: 'serialNumber', name: 'YY003J519951' }
-            ]
+            deviceInfo: {
+                'udn': '29a40003-6807-10ef-800f-000000000000',
+                'serial-number': 'YY003J519951'
+            }
         };
 
-        expect(reducer(state, payload)).toEqual(state);
+        expect(reducer(state, payload)).toEqual(expected);
     });
 });
