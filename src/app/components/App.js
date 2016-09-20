@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import {StyleSheet, Text, View} from 'react-native';
-import { actions, selectors } from './../../common/modules';
+import { actions, selectors } from './../../../shared/modules';
 
 import {
     AsteriskButton,
