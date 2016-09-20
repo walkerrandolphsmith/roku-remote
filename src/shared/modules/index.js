@@ -1,12 +1,17 @@
 import keys from './../constants/keys';
 import devices, { getRokuDevices, getSelectedDevice } from './devices';
+import { getRokuDetails } from './getDetails';
+import getAppIcons from './getAppIcons';
+import getApps from './getApps';
+import getDeviceInfo from './getDeviceInfo';
 import keypress, { keyPress } from './keypress';
-import getDetails, { getRokuDetails } from './getDetails';
 
 const handlers = [
     devices,
-    keypress,
-    getDetails
+    getAppIcons,
+    getApps,
+    getDeviceInfo,
+    keypress
 ].reduce((output, handler) => Object.assign(output, handler), {});
 
 const DEFAULT_STATE = {
@@ -25,8 +30,8 @@ export default (state = DEFAULT_STATE, action = {}) => {
 
 export const actions = {
     getRokuDevices,
-    keyPress,
-    getRokuDetails
+    getRokuDetails,
+    keyPress
 };
 
 export const selectors = {
