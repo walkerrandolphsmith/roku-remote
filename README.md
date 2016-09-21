@@ -36,6 +36,8 @@ Alternatively you can tagert a specific env:
 react-native run-ios
 react-native run-android
 ```
+Press Cmd+R to reload,{'\n'}
+Cmd+D or shake for dev menu
 
 
 [ci]: http://img.shields.io/codeship/aaf21d80-617f-0134-f70b-1ebd69f68930.svg?style=flat-square
