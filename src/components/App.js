@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { actions, selectors } from './../shared/modules';
 import { Remote } from './Remote';
-import { ChannelsList } from './ChannelsList';
+import { ChannelList } from './ChannelList';
 import { Settings } from './Settings';
 import styles from './App.styles';
 
@@ -31,7 +31,7 @@ class _App extends React.Component {
                         <Remote {...this.props} />
                     </View>
                     <View style={styles.slide2}>
-                        <ChannelsList {...this.props} />
+                        <ChannelList {...this.props} />
                     </View>
                     <View style={styles.slide3}>
                         <Settings {...this.props} />

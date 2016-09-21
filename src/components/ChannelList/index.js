@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, ListView } from 'react-native';
-import styles from './ChannelList.styles';
+import styles from './index.styles';
 
 export class Channel extends React.Component {
     render() {
@@ -13,7 +13,7 @@ export class Channel extends React.Component {
     }
 }
 
-export class ChannelsList extends React.Component {
+export class ChannelList extends React.Component {
     constructor(props, context) {
         super(props, context);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
