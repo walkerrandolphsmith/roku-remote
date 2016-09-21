@@ -18,7 +18,7 @@ import { HotButtons } from './../HotButtons';
 
 export class Remote extends React.Component {
     render(){
-        const { atom, keyPress, hotButtons } = this.props;
+        const { atom, keyPress, hotButtons, launchApp } = this.props;
         const { keys } = atom;
         return (
             <View>
@@ -34,7 +34,7 @@ export class Remote extends React.Component {
                 <OkButton keyPress={keyPress} { ...keys} />
                 <SearchButton keyPress={keyPress} { ...keys} />
                 <AsteriskButton keyPress={keyPress} { ...keys} />
-                <HotButtons hotButtons={hotButtons} />
+                <HotButtons hotButtons={hotButtons} launchApp={launchApp} />
             </View>
         );
     }
