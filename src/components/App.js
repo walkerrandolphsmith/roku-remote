@@ -1,47 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import {StyleSheet, Text, View} from 'react-native';
+import { View } from 'react-native';
+import Swiper from 'react-native-swiper';
 import { actions, selectors } from './../shared/modules';
-
-import {
-    AsteriskButton,
-    BackButton,
-    DownButton,
-    HomeButton,
-    LeftButton,
-    OkButton,
-    RightButton,
-    SearchButton,
-    UpButton,
-    FastForwardButton,
-    RewindButton,
-    PlayButton
-} from './RemoteButtons';
-
-let styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5
-    }
-});
+import { Remote } from './Remote';
+import { ChannelsList } from './ChannelsList';
+import { Settings } from './Settings';
+import styles from './App.styles';
 
 class _App extends React.Component {
-    state = {
-        rokuUrls: []
-    };
-
     componentDidMount() {
         this.props.getRokuDevices();
         this.props.getRokuDetails();
@@ -56,31 +24,19 @@ class _App extends React.Component {
 
 
     render(){
-        const { keys, rokus, channels } = this.props.atom;
-        const { selectedDeviceHydrated, keyPress } = this.props;
-        const rokuUrls = rokus.map(device => <Text key={device.url}>{device.url}</Text>);
-        const channelList = channels.map(channel => <Text key={channel.id}>{channel.id} {channel.name}</Text>);
         return (
-            <View style={styles.container}>
-                {/*<Text style={styles.instructions}>
-                    Press Cmd+R to reload,{'\n'}
-                    Cmd+D or shake for dev menu
-                </Text>*/}
-                <Text>selected: {selectedDeviceHydrated.url}</Text>
-                {rokuUrls}
-                {channelList}
-                <HomeButton keyPress={keyPress} { ...keys} />
-                <RewindButton keyPress={keyPress} { ...keys} />
-                <FastForwardButton keyPress={keyPress} { ...keys} />
-                <PlayButton keyPress={keyPress} { ...keys} />
-                <BackButton keyPress={keyPress} { ...keys} />
-                <DownButton keyPress={keyPress} { ...keys} />
-                <UpButton keyPress={keyPress} { ...keys} />
-                <LeftButton keyPress={keyPress} { ...keys} />
-                <RightButton keyPress={keyPress} { ...keys} />
-                <OkButton keyPress={keyPress} { ...keys} />
-                <SearchButton keyPress={keyPress} { ...keys} />
-                <AsteriskButton keyPress={keyPress} { ...keys} />
+            <View>
+                <Swiper style={styles.wrapper} height={680} horizontal={true} autoplay={false}>
+                    <View style={styles.slide1}>
+                        <Remote {...this.props} />
+                    </View>
+                    <View style={styles.slide2}>
+                        <ChannelsList {...this.props} />
+                    </View>
+                    <View style={styles.slide3}>
+                        <Settings {...this.props} />
+                    </View>
+                </Swiper>
             </View>
         );
     }

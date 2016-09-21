@@ -23,6 +23,7 @@
     "react-native": "0.33.0",
     "react-native-button": "^1.7.0",
     "react-native-ssdp": "^2.7.5",
+    "react-native-swiper": "^1.4.11",
     "react-redux": "4.4.5",
     "redux": "3.5.2",
     "redux-actions": "0.11.0",
@@ -41,6 +42,8 @@
     "preset": "jest-react-native"
   },
   "babel": {
-    "presets": ["react-native"]
+    "presets": [
+      "react-native"
+    ]
   }
 }
