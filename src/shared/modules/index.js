@@ -5,6 +5,7 @@ import getAppIcons from './getAppIcons';
 import getApps from './getApps';
 import getDeviceInfo from './getDeviceInfo';
 import keypress, { keyPress } from './keypress';
+import { launchApp } from './launchApp';
 
 const handlers = [
     devices,
@@ -31,7 +32,8 @@ export default (state = DEFAULT_STATE, action = {}) => {
 export const actions = {
     getRokuDevices,
     getRokuDetails,
-    keyPress
+    keyPress,
+    launchApp
 };
 
 export const selectors = {

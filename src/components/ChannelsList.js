@@ -4,10 +4,10 @@ import styles from './ChannelList.styles';
 
 export class Channel extends React.Component {
     render() {
-        const { id, name } = this.props;
+        const { id, name, launchApp } = this.props;
         return (
             <View style={styles.channel}>
-                <Text onPress={() => { console.log(id) }}>{name}</Text>
+                <Text onPress={() => { launchApp(id); }}>{name}</Text>
             </View>
         );
     }
@@ -34,7 +34,7 @@ export class ChannelsList extends React.Component {
                 <ListView
                     enableEmptySections={true}
                     dataSource={this.state.dataSource}
-                    renderRow={(channel) => <Channel {...channel} />}
+                    renderRow={(channel) => <Channel {...channel} launchApp={this.props.launchApp} />}
                 />
             </View>
         );
