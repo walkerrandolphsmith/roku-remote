@@ -34,7 +34,7 @@ export const reducer = (state, payload) => {
     }
 
     const deviceInfo = onlyElements.reduce((deviceInfo, node) => {
-        deviceInfo[node.tagName] = node.childNodes[0].data;
+        deviceInfo[node.tagName] = node.childNodes[0] ? node.childNodes[0].data : '';
         return deviceInfo
     }, {});
 
