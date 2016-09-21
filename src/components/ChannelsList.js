@@ -1,13 +1,41 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ListView } from 'react-native';
+import styles from './ChannelList.styles';
+
+export class Channel extends React.Component {
+    render() {
+        const { id, name } = this.props;
+        return (
+            <View style={styles.channel}>
+                <Text onPress={() => { console.log(id) }}>{name}</Text>
+            </View>
+        );
+    }
+}
 
 export class ChannelsList extends React.Component {
-    render(){
-        const { channels } = this.props.atom;
-        const channelList = channels.map(channel => <Text key={channel.id}>{channel.id} {channel.name}</Text>);
+    constructor(props, context) {
+        super(props, context);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            dataSource: ds.cloneWithRows(props.atom.channels)
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(nextProps.atom.channels)
+        });
+    }
+
+    render() {
         return (
-            <View>
-                {channelList}
+            <View style={styles.wrapper}>
+                <ListView
+                    enableEmptySections={true}
+                    dataSource={this.state.dataSource}
+                    renderRow={(channel) => <Channel {...channel} />}
+                />
             </View>
         );
     }

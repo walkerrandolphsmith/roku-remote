@@ -20,8 +20,8 @@ export default StyleSheet.create({
 
     slide2: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'stretch',
         backgroundColor: '#97CAE5'
     },
 
