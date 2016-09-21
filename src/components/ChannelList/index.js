@@ -7,7 +7,7 @@ export class Channel extends React.Component {
         const { id, name, launchApp } = this.props;
         return (
             <View style={styles.channel}>
-                <Text onPress={() => { launchApp(id); }}>{name}</Text>
+                <Text onPress={() => { launchApp(id); }}>{id} {name}</Text>
             </View>
         );
     }

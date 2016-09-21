@@ -43,8 +43,9 @@ class _App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    const hotButtons = selectors.getHotButtons(state);
     const selectedDeviceHydrated = selectors.getSelectedDevice(state);
-    return { ...state, selectedDeviceHydrated };
+    return { ...state, selectedDeviceHydrated, hotButtons };
 };
 
 const mapDispatchToProps = (dispatch) => {

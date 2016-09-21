@@ -6,6 +6,7 @@ import getApps from './getApps';
 import getDeviceInfo from './getDeviceInfo';
 import keypress, { keyPress } from './keypress';
 import { launchApp } from './launchApp';
+import { getHotButtons } from './hotButtons';
 
 const handlers = [
     devices,
@@ -21,7 +22,8 @@ const DEFAULT_STATE = {
     ],
     selectedDevice: 'http://10.0.0.8:8060/',
     keys: keys,
-    channels: []
+    channels: [],
+    hotButtons: [12, 13, 46041, 2285]
 };
 
 export default (state = DEFAULT_STATE, action = {}) => {
@@ -37,5 +39,6 @@ export const actions = {
 };
 
 export const selectors = {
-    getSelectedDevice
+    getSelectedDevice,
+    getHotButtons
 };
