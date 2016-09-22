@@ -4,7 +4,7 @@ import {
     FastForwardButton,
     RewindButton,
     PlayButton
-} from './RemoteButtons';
+} from './../RemoteButtons';
 
 export class ControlButtons extends React.Component {
     render(){

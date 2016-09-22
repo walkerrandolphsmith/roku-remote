@@ -6,7 +6,7 @@ import {
     OkButton,
     RightButton,
     UpButton
-} from './RemoteButtons';
+} from './../RemoteButtons';
 
 export class NavigationButtons extends React.Component {
     render(){
