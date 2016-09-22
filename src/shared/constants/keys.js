@@ -15,3 +15,5 @@ export default [
     'Search',
     'Enter'
 ].reduce((keys, next) => { keys[next.toUpperCase()] = next; return keys; }, {});
+
+const replay = '\u21BA';

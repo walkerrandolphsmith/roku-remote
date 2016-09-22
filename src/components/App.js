@@ -7,6 +7,7 @@ import { actions, selectors } from './../shared/modules';
 import { Remote } from './Remote';
 import { ChannelList } from './ChannelList';
 import { Settings } from './Settings';
+import { Temp } from './Temp';
 import styles from './App.styles';
 
 class _App extends React.Component {
@@ -27,6 +28,9 @@ class _App extends React.Component {
         return (
             <View>
                 <Swiper style={styles.wrapper} height={680} horizontal={true} autoplay={false}>
+                    <View style={styles.slide3}>
+                        <Temp {...this.props} />
+                    </View>
                     <View style={styles.slide1}>
                         <Remote {...this.props} />
                     </View>
