@@ -1,39 +1,70 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
+import { ControlButtons } from './ControlButtons';
+import { NavigationButtons } from './NavigationButtons';
 import {
     AsteriskButton,
     BackButton,
-    DownButton,
     HomeButton,
-    LeftButton,
-    OkButton,
-    RightButton,
-    SearchButton,
-    UpButton,
-    FastForwardButton,
-    RewindButton,
-    PlayButton
-} from './../RemoteButtons';
-import { HotButtons } from './../HotButtons';
+    SearchButton
+} from './RemoteButtons';
+import { HotButtons } from './HotButtons';
 
 export class Remote extends React.Component {
     render(){
         const { atom, keyPress, hotButtons, launchApp } = this.props;
         const { keys } = atom;
+        
+        const large = {
+            width: 280,
+            height: 280,
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        };
+
+        const topLeft = {
+            position: 'absolute',
+            left: 25,
+            top: 25
+        };
+
+        const topRight = {
+            position: 'absolute',
+            right: 25,
+            top: 25
+        };
+
+        const bottomLeft = {
+            position: 'absolute',
+            left: 25,
+            bottom: 25
+        };
+
+        const bottomRight = {
+            position: 'absolute',
+            right: 25,
+            bottom: 25
+        };
+
         return (
             <View>
-                <HomeButton keyPress={keyPress} { ...keys} />
-                <RewindButton keyPress={keyPress} { ...keys} />
-                <FastForwardButton keyPress={keyPress} { ...keys} />
-                <PlayButton keyPress={keyPress} { ...keys} />
-                <BackButton keyPress={keyPress} { ...keys} />
-                <DownButton keyPress={keyPress} { ...keys} />
-                <UpButton keyPress={keyPress} { ...keys} />
-                <LeftButton keyPress={keyPress} { ...keys} />
-                <RightButton keyPress={keyPress} { ...keys} />
-                <OkButton keyPress={keyPress} { ...keys} />
-                <SearchButton keyPress={keyPress} { ...keys} />
-                <AsteriskButton keyPress={keyPress} { ...keys} />
+                <View style={large}>
+                    <View style={topLeft}>
+                        <BackButton keyPress={keyPress} { ...keys} />
+                    </View>
+                    <View style={topRight}>
+                        <HomeButton keyPress={keyPress} { ...keys} />
+                    </View>
+                    <NavigationButtons keyPress={keyPress} keys={keys} />
+                    <View style={bottomLeft}>
+                        <SearchButton keyPress={keyPress} { ...keys} />
+                    </View>
+                    <View style={bottomRight}>
+                        <AsteriskButton keyPress={keyPress} { ...keys} />
+                    </View>
+                </View>
+                <ControlButtons keyPress={keyPress} keys={keys} />
                 <HotButtons hotButtons={hotButtons} launchApp={launchApp} />
             </View>
         );

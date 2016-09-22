@@ -1,9 +1,16 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+    DownButton,
+    LeftButton,
+    OkButton,
+    RightButton,
+    UpButton
+} from './RemoteButtons';
 
 export class NavigationButtons extends React.Component {
     render(){
+        const { keys, keyPress } = this.props;
 
         const size = 65;
         const color = '#000';
@@ -71,42 +78,37 @@ export class NavigationButtons extends React.Component {
             alignItems: 'center'
         };
 
-        const okText = {
-            fontSize: 30
-        };
-
         return (
             <View style={small}>
                 <View style={right}>
                     <View style={iconWrapper}>
-                        <Icon name="angle-right" size={size} color={color} />
+                        <RightButton keyPress={keyPress} { ...keys} />
                     </View>
                 </View>
 
                 <View style={left}>
                     <View style={iconWrapper}>
-                        <Icon name="angle-left" size={size} color={color} />
+                        <LeftButton keyPress={keyPress} { ...keys} />
                     </View>
                 </View>
 
                 <View style={okWrapper}>
                     <View style={ok}>
-                        <Text style={okText}>OK</Text>
+                        <OkButton keyPress={keyPress} { ...keys}/>
                     </View>
                 </View>
 
                 <View style={up}>
                     <View style={iconWrapper}>
-                        <Icon name="angle-up" size={size} color={color} />
+                        <UpButton keyPress={keyPress} { ...keys} />
                     </View>
                 </View>
 
                 <View style={down}>
                     <View style={iconWrapper}>
-                        <Icon name="angle-down" size={size} color={color} />
+                        <DownButton keyPress={keyPress} { ...keys} />
                     </View>
                 </View>
-
             </View>
         );
 
