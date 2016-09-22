@@ -27,7 +27,7 @@ class _App extends React.Component {
         return (
             <View>
                 <Swiper style={styles.wrapper} height={680} horizontal={true} autoplay={false}>
-                    <View style={styles.slide3}>
+                    <View style={styles.slide1}>
                         <Remote {...this.props} />
                     </View>
                     <View style={styles.slide2}>

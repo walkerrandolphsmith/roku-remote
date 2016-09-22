@@ -8,18 +8,13 @@ export class HotButtons extends React.Component {
         const buttons = hotButtons.map(button => {
             const base64Icon = `data:image/png;base64,${button.icon}`;
             return (
-                <View style={styles.wrapper} key={button.id}>
-                    <View style={styles.iconWrapper}>
-                        <Image style={styles.icon} source={{uri: base64Icon}}/>
-                    </View>
-                    <View style={styles.labelWrapper}>
-                        <Text style={styles.label} onPress={() => { launchApp(id); }}>{button.name}</Text>
-                    </View>
+                <View style={styles.iconWrapper} key={button.id}>
+                    <Image style={styles.icon} source={{uri: base64Icon}} onPress={() => { launchApp(id); }} />
                 </View>
             )
         });
         return (
-            <View>
+            <View style={styles.wrapper}>
                 {buttons}
             </View>
         );

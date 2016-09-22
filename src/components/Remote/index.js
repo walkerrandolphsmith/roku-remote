@@ -14,7 +14,14 @@ export class Remote extends React.Component {
     render(){
         const { atom, keyPress, hotButtons, launchApp } = this.props;
         const { keys } = atom;
-        
+
+        const largeWrapper = {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingBottom: 60
+        };
+
         const large = {
             width: 280,
             height: 280,
@@ -49,19 +56,21 @@ export class Remote extends React.Component {
 
         return (
             <View>
-                <View style={large}>
-                    <View style={topLeft}>
-                        <BackButton keyPress={keyPress} { ...keys} />
-                    </View>
-                    <View style={topRight}>
-                        <HomeButton keyPress={keyPress} { ...keys} />
-                    </View>
-                    <NavigationButtons keyPress={keyPress} keys={keys} />
-                    <View style={bottomLeft}>
-                        <SearchButton keyPress={keyPress} { ...keys} />
-                    </View>
-                    <View style={bottomRight}>
-                        <AsteriskButton keyPress={keyPress} { ...keys} />
+                <View style={largeWrapper}>
+                    <View style={large}>
+                        <View style={topLeft}>
+                            <BackButton keyPress={keyPress} { ...keys} />
+                        </View>
+                        <View style={topRight}>
+                            <HomeButton keyPress={keyPress} { ...keys} />
+                        </View>
+                        <NavigationButtons keyPress={keyPress} keys={keys} />
+                        <View style={bottomLeft}>
+                            <SearchButton keyPress={keyPress} { ...keys} />
+                        </View>
+                        <View style={bottomRight}>
+                            <AsteriskButton keyPress={keyPress} { ...keys} />
+                        </View>
                     </View>
                 </View>
                 <ControlButtons keyPress={keyPress} keys={keys} />

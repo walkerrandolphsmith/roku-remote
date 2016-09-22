@@ -15,8 +15,7 @@ export class ControlButtons extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection:'row',
-            height: 50,
-            marginTop: 25
+            height: 50
         };
 
         const item = {

@@ -5,22 +5,15 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
-        width: 150
-    },
-    labelWrapper: {
-        flex: 2,
         alignItems: 'center'
     },
-    label: {
-
-    },
     iconWrapper: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'space-between'
     },
     icon: {
-        width: 16,
-        height: 16,
+        width: 90,
+        height: 65,
         resizeMode: Image.resizeMode.contain
     }
 });
