@@ -12,9 +12,6 @@ export class NavigationButtons extends React.Component {
     render(){
         const { keys, keyPress } = this.props;
 
-        const size = 65;
-        const color = '#000';
-
         const small = {
             borderWidth: 0.5,
             borderColor: '#d6d7da',
@@ -57,7 +54,8 @@ export class NavigationButtons extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             width: 50,
-            height: 50
+            height: 50,
+            backgroundColor: 'transparent'
         };
 
         const okWrapper = {

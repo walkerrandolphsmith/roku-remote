@@ -11,8 +11,8 @@ export default class SearchButton extends AbstractButton {
         return (
             <Icon
                 name="search"
-                size={30}
-                color="#000"
+                size={AbstractButton.defaultProps.size}
+                color={AbstractButton.defaultProps.color}
                 onPress={this.childHandler.bind(this)}
             />
         );

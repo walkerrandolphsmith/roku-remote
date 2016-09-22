@@ -14,7 +14,7 @@ export default StyleSheet.create({
     slide1: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#92BBD9'
+        backgroundColor: '#000'
     },
 
     slide2: {

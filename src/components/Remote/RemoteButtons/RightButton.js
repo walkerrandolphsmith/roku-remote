@@ -11,8 +11,8 @@ export default class RightButton extends AbstractButton {
         return (
             <Icon
                 name="angle-right"
-                size={30}
-                color="#000"
+                size={AbstractButton.defaultProps.largeSize}
+                color={AbstractButton.defaultProps.color}
                 onPress={this.childHandler.bind(this)}
             />
         );

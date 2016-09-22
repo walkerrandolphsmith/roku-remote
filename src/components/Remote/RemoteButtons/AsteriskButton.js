@@ -11,8 +11,8 @@ export default class AsteriskButton extends AbstractButton {
         return (
             <Icon
                 name="asterisk"
-                size={30}
-                color="#000"
+                size={AbstractButton.defaultProps.size}
+                color={AbstractButton.defaultProps.color}
                 onPress={this.childHandler.bind(this)}
             />
         );

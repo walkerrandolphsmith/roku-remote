@@ -9,7 +9,8 @@ export default class OkButton extends AbstractButton {
 
     render(){
         const okText = {
-            fontSize: 30
+            fontSize: AbstractButton.defaultProps.size,
+            color: AbstractButton.defaultProps.color
         };
 
         return (

@@ -11,8 +11,8 @@ export default class RewindButton extends AbstractButton {
         return (
             <Icon
                 name="backward"
-                size={30}
-                color="#000"
+                size={AbstractButton.defaultProps.size}
+                color={AbstractButton.defaultProps.color}
                 onPress={this.childHandler.bind(this)}
             />
         );
