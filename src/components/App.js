@@ -24,9 +24,16 @@ class _App extends React.Component {
 
 
     render(){
+        const dot= <View style={{backgroundColor:'rgba(168, 94, 245,0.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />
+        const activeDot= <View style={{backgroundColor: '#A85EF5', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />
         return (
             <View>
-                <Swiper style={styles.wrapper} height={680} horizontal={true} autoplay={false}>
+                <Swiper style={styles.wrapper}
+                        height={680}
+                        horizontal={true}
+                        autoplay={false}
+                        dot={dot}
+                        activeDot={activeDot}>
                     <View style={styles.slide1}>
                         <Remote {...this.props} />
                     </View>
