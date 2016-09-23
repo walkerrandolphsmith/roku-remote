@@ -4,16 +4,18 @@ export default StyleSheet.create({
     wrapper: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        margin: 10
     },
     iconWrapper: {
-        flex: 1,
-        justifyContent: 'space-between'
+
     },
     icon: {
-        width: 90,
-        height: 65,
-        resizeMode: Image.resizeMode.contain
+        width: 120,
+        height: 80,
+        resizeMode: Image.resizeMode.contain,
+        marginBottom: 10
     }
 });

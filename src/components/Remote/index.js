@@ -19,7 +19,7 @@ export class Remote extends React.Component {
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            paddingBottom: 60
+            paddingBottom: 30
         };
 
         const large = {
@@ -54,6 +54,15 @@ export class Remote extends React.Component {
             bottom: 25
         };
 
+        const controlButtonStyles = {
+            height: 50,
+            marginBottom: 10
+        };
+
+        const hotButtonStyles = {
+            height: 180
+        };
+
         return (
             <View>
                 <View style={largeWrapper}>
@@ -73,8 +82,12 @@ export class Remote extends React.Component {
                         </View>
                     </View>
                 </View>
-                <ControlButtons keyPress={keyPress} keys={keys} />
-                <HotButtons hotButtons={hotButtons} launchApp={launchApp} />
+                <View style={controlButtonStyles}>
+                    <ControlButtons keyPress={keyPress} keys={keys} />
+                </View>
+                <View style={hotButtonStyles}>
+                    <HotButtons hotButtons={hotButtons} launchApp={launchApp} />
+                </View>
             </View>
         );
     }
