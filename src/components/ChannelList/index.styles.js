@@ -3,27 +3,20 @@ import { StyleSheet, Image } from 'react-native';
 export default StyleSheet.create({
     wrapper: {
         flex: 1,
-        alignSelf: 'stretch'
-    },
-    channel: {
-        marginTop: 60,
         flexDirection: 'row'
     },
-    labelWrapper: {
-        flex: 3,
-        alignItems: 'center'
-    },
-    label: {
-        width: 300
+    channel: {
+        flexDirection: 'row'
     },
     iconWrapper: {
         flex: 1,
-        alignItems: 'center',
-        marginLeft: 20
+        width: 100,
+        height: 100,
+        margin: 10
     },
     icon: {
-        width: 32,
-        height: 32,
+        width: 100,
+        height: 100,
         resizeMode: Image.resizeMode.contain
     }
 });
