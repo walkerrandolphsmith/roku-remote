@@ -6,11 +6,7 @@ import styles from './index.styles';
 export class ChannelList extends React.Component {
     constructor(props, context) {
         super(props, context);
-        const rowHasChanged = (r1, r2) => (
-            r1.icon !== r2.icon
-            || r1.id !== r2.id
-        );
-        const ds = new ListView.DataSource({ rowHasChanged: rowHasChanged });
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             dataSource: ds.cloneWithRows(props.atom.channels)
         };

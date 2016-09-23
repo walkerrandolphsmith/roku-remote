@@ -21,12 +21,7 @@ export const getAppIcons = () => (dispatch, getState) => {
 
 export const reducer = (state, payload) => {
     const { id, icon } = payload;
-    state.channels.forEach(channel => {
-        if(channel.id === id) {
-            channel.icon = icon;
-        }
-    });
-    state.channels = [...state.channels];
+    state.channels = state.channels.map(channel => channel.id === id ? { ...channel, icon } : channel);
     return { ...state };
 };
 
