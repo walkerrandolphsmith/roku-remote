@@ -5,11 +5,11 @@ export class Settings extends React.Component {
     render(){
         const { atom, selectedDeviceHydrated } = this.props;
         const { rokus } = atom;
-        const rokuUrls = rokus.map(device => <Text key={device.url}>{device.url}</Text>);
+        const rokuUrls = rokus.map(device => <Text style={{color: '#fff'}} key={device.url}>{device.url}</Text>);
 
         return (
             <View>
-                <Text> Selected: {selectedDeviceHydrated.url}</Text>
+                <Text style={{color: '#fff'}}> Selected: {selectedDeviceHydrated.url}</Text>
                 {rokuUrls}
             </View>
         );
