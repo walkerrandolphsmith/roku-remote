@@ -21,7 +21,7 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         alignSelf: 'stretch',
-        backgroundColor: '#97CAE5'
+        backgroundColor: '#000'
     },
 
     slide3: {

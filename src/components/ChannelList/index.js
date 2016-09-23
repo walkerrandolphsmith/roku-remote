@@ -26,6 +26,7 @@ export class ChannelList extends React.Component {
         return (
             <View style={styles.wrapper}>
                 <ListView
+                    contentContainerStyle={styles.grid}
                     enableEmptySections={true}
                     dataSource={this.state.dataSource}
                     renderRow={(channel) => <ChannelButton {...channel} styles={styles} launchApp={this.props.launchApp} />}

@@ -3,7 +3,12 @@ import { StyleSheet, Image } from 'react-native';
 export default StyleSheet.create({
     wrapper: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    grid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     },
     channel: {
         flexDirection: 'row'
