@@ -1,6 +1,6 @@
 import keys from './../constants/keys';
 import devices, { getRokuDevices } from './devices';
-import { getSelectedDevice } from './selectedDeivce';
+import setSelectedDevice, { getSelectedDevice, selectDevice, setSelectedDeviceOnLoad } from './selectedDeivce';
 import { getRokuDetails } from './getDetails';
 import getAppIcons from './getAppIcons';
 import getApps from './getApps';
@@ -8,13 +8,15 @@ import getDeviceInfo from './getDeviceInfo';
 import keypress, { keyPress } from './keypress';
 import { launchApp } from './launchApp';
 import { getHotButtons } from './hotButtons';
+import { onLoad } from './onLoad';
 
 const handlers = [
     devices,
     getAppIcons,
     getApps,
     getDeviceInfo,
-    keypress
+    keypress,
+    setSelectedDevice
 ].reduce((output, handler) => Object.assign(output, handler), {});
 
 const DEFAULT_STATE = {
@@ -36,7 +38,10 @@ export const actions = {
     getRokuDevices,
     getRokuDetails,
     keyPress,
-    launchApp
+    launchApp,
+    selectDevice,
+    setSelectedDeviceOnLoad,
+    onLoad
 };
 
 export const selectors = {

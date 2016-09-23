@@ -9,7 +9,7 @@ const success = createAction(
 );
 
 export const getDeviceInfo = () => (dispatch, getState) => {
-    const url = getState().atom.rokus[0].url;
+    const url = getState().atom.selectedDevice;
     const deviceInfoUrl = `${url}query/device-info`;
     
     fetch(deviceInfoUrl, {

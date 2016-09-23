@@ -11,8 +11,7 @@ import styles from './App.styles';
 
 class _App extends React.Component {
     componentDidMount() {
-        this.props.getRokuDevices();
-        this.props.getRokuDetails();
+        this.props.onLoad();
     }
 
     componentWillReceiveProps(nextProps) {

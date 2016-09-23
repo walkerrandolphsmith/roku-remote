@@ -10,15 +10,14 @@ const success = createAction(
 );
 
 export const getApps = () => (dispatch, getState) => {
-    const url = getState().atom.rokus[0].url;
+    const url = getState().atom.selectedDevice;
     const appsUrl = `${url}query/apps`;
 
-    fetch(appsUrl, {
+    return fetch(appsUrl, {
         method: 'GET'
     }).then((res) => {
-        res.text().then(xml => {
+        return res.text().then(xml => {
             dispatch(success(xml));
-            dispatch(getAppIcons());
         });
     });
 };

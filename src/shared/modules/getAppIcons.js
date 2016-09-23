@@ -10,7 +10,7 @@ const success = createAction(
 
 export const getAppIcons = () => (dispatch, getState) => {
     const channels = getState().atom.channels;
-    const url = getState().atom.rokus[0].url;
+    const url = getState().atom.selectedDevice;
     channels.forEach(channel => {
         RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`).then(res => {
             const base64Str = res.base64();
