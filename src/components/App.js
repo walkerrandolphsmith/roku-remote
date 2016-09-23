@@ -32,16 +32,17 @@ class _App extends React.Component {
                         height={680}
                         horizontal={true}
                         autoplay={false}
+                        index={1}
                         dot={dot}
                         activeDot={activeDot}>
+                    <View style={styles.slide3}>
+                        <Settings {...this.props} />
+                    </View>
                     <View style={styles.slide1}>
                         <Remote {...this.props} />
                     </View>
                     <View style={styles.slide2}>
                         <ChannelList {...this.props} />
-                    </View>
-                    <View style={styles.slide3}>
-                        <Settings {...this.props} />
                     </View>
                 </Swiper>
             </View>
