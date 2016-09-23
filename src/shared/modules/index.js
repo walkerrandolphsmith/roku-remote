@@ -1,5 +1,6 @@
 import keys from './../constants/keys';
-import devices, { getRokuDevices, getSelectedDevice } from './devices';
+import devices, { getRokuDevices } from './devices';
+import { getSelectedDevice } from './selectedDeivce';
 import { getRokuDetails } from './getDetails';
 import getAppIcons from './getAppIcons';
 import getApps from './getApps';
