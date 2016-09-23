@@ -5,33 +5,20 @@ import {
     RewindButton,
     PlayButton
 } from './../RemoteButtons';
+import styles from './index.styles';
 
 export class ControlButtons extends React.Component {
     render(){
         const { keys, keyPress } = this.props;
-
-        const style = {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection:'row',
-            height: 50
-        };
-
-        const item = {
-            marginLeft: 20,
-            marginRight: 20
-        };
-
         return (
-            <View style={style}>
-                <View style={item}>
+            <View style={styles.wrapper}>
+                <View>
                     <RewindButton keyPress={keyPress} { ...keys} />
                 </View>
-                <View style={item}>
+                <View style={styles.play}>
                     <PlayButton keyPress={keyPress} { ...keys} />
                 </View>
-                <View style={item}>
+                <View>
                     <FastForwardButton keyPress={keyPress} { ...keys} />
                 </View>
             </View>
