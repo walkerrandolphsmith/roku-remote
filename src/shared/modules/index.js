@@ -25,7 +25,7 @@ const DEFAULT_STATE = {
     ],
     selectedDevice: 'http://10.0.0.8:8060/',
     keys: keys,
-    channels: [],
+    channels: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
     hotButtons: [12, 13, 46041, 2285]
 };
 

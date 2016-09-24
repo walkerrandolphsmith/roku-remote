@@ -6,8 +6,8 @@ import styles from './index.styles';
 export class HotButtons extends React.Component {
     render(){
         const { hotButtons, launchApp } = this.props;
-        const buttons = hotButtons.map(button =>
-            <ChannelButton key={button.id} {...button} styles={styles} launchApp={launchApp} />
+        const buttons = hotButtons.map((button, i) =>
+            <ChannelButton key={i} {...button} styles={styles} launchApp={launchApp} />
         );
         return (
             <View style={styles.wrapper}>

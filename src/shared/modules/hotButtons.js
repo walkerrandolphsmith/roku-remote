@@ -5,5 +5,8 @@ const channelsSelector = (state) => state.atom.channels;
 
 export const getHotButtons = createSelector(
     [hotButtonsSelector, channelsSelector],
-    (hotButtonIds, channels) => channels.filter(channel => hotButtonIds.includes(parseInt(channel.id)))
+    (hotButtonIds, channels) => {
+        const hotButtons = channels.filter(channel => hotButtonIds.includes(parseInt(channel.id)));
+        return hotButtons.length > 0 ? hotButtons : [{},{},{},{}]
+    }
 );
