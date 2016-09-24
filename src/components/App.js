@@ -1,36 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { View } from 'react-native';
+import { View, Text, Easing } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import Swiper from 'react-native-swiper';
 import { actions, selectors } from './../shared/modules';
 import { Remote } from './Remote';
 import { ChannelList } from './ChannelList';
 import { Settings } from './Settings';
 import styles from './App.styles';
-import SplashScreen from "rn-splash-screen";
 
-class _App extends React.Component {
-    componentDidMount() {
-        this.props.onLoad().then(hasLoaded => {
-            SplashScreen.hide();
-        });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(this.props.selectedDevice !== nextProps.selectedDevice) {
-            this.props.getRokuDetails();
-            debugger;
-        }
-    }
-
-
+class App extends React.Component {
     render(){
         const dot= <View style={{backgroundColor:'rgba(168, 94, 245,0.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />
         const activeDot= <View style={{backgroundColor: '#A85EF5', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />
         return (
-            <View>
-                <Swiper style={styles.wrapper}
+            <Animatable.View refs="app" animation="fadeIn" duration={800} style={styles.wrapper}>
+                <Swiper style={styles.swiper}
                         height={680}
                         horizontal={true}
                         autoplay={false}
@@ -47,8 +33,49 @@ class _App extends React.Component {
                         <ChannelList {...this.props} />
                     </View>
                 </Swiper>
-            </View>
+            </Animatable.View>
         );
+    }
+}
+
+class Loading extends React.Component {
+    render() {
+        return (
+            <Animatable.View style={styles.loading}>
+                <View style={styles.loadingBall} />
+            </Animatable.View>
+        )
+    }
+}
+
+
+
+class _App extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = { isLoading: true };
+    }
+
+    componentDidMount() {
+        this.props.onLoad().then(hasLoaded => {
+            this.setState({ isLoading: false })
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.selectedDevice !== nextProps.selectedDevice) {
+            this.props.getRokuDetails();
+            debugger;
+        }
+    }
+
+    render(){
+        const component = this.state.isLoading ? <Loading /> : <App {...this.props} />;
+        return (
+            <View style={styles.main}>
+                {component}
+            </View>
+        )
     }
 }
 
