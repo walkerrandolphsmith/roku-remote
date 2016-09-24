@@ -8,10 +8,13 @@ import { Remote } from './Remote';
 import { ChannelList } from './ChannelList';
 import { Settings } from './Settings';
 import styles from './App.styles';
+import SplashScreen from "rn-splash-screen";
 
 class _App extends React.Component {
     componentDidMount() {
-        this.props.onLoad();
+        this.props.onLoad().then(hasLoaded => {
+            SplashScreen.hide();
+        });
     }
 
     componentWillReceiveProps(nextProps) {

@@ -11,12 +11,12 @@ const success = createAction(
 export const getAppIcons = () => (dispatch, getState) => {
     const channels = getState().atom.channels;
     const url = getState().atom.selectedDevice;
-    channels.forEach(channel => {
-        RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`).then(res => {
+    return channels.map(channel => {
+        return RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`).then(res => {
             const base64Str = res.base64();
-            dispatch(success(channel.id, base64Str));
+            return dispatch(success(channel.id, base64Str));
         });
-    })
+    });
 };
 
 export const reducer = (state, payload) => {

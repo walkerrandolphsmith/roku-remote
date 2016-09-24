@@ -9,4 +9,5 @@ dependencies: \
   ../node_modules/react-native/React/Base/RCTBridgeModule.h \
   ../node_modules/react-native/React/Base/RCTDefines.h \
   ../node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  ../node_modules/react-native/React/Base/RCTInvalidating.h
+  ../node_modules/react-native/React/Base/RCTInvalidating.h \
+  ../node_modules/rn-splash-screen/ios/RCTSplashScreen/RCTSplashScreen.h
