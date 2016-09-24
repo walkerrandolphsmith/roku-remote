@@ -21,7 +21,7 @@ const handlers = [
 
 const DEFAULT_STATE = {
     rokus: [
-        { url: 'http://10.0.0.8:8060/' }
+
     ],
     selectedDevice: 'http://10.0.0.8:8060/',
     keys: keys,
