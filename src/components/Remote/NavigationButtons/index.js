@@ -10,6 +10,8 @@ import {
 
 export class NavigationButtons extends React.Component {
     render(){
+        const { url } = this.props;
+
         const small = {
             borderWidth: 0.5,
             borderColor: '#d6d7da',
@@ -78,31 +80,31 @@ export class NavigationButtons extends React.Component {
             <View style={small}>
                 <View style={right}>
                     <View style={iconWrapper}>
-                        <RightButton />
+                        <RightButton url={url} />
                     </View>
                 </View>
 
                 <View style={left}>
                     <View style={iconWrapper}>
-                        <LeftButton />
+                        <LeftButton url={url} />
                     </View>
                 </View>
 
                 <View style={okWrapper}>
                     <View style={ok}>
-                        <OkButton />
+                        <OkButton url={url} />
                     </View>
                 </View>
 
                 <View style={up}>
                     <View style={iconWrapper}>
-                        <UpButton />
+                        <UpButton url={url} />
                     </View>
                 </View>
 
                 <View style={down}>
                     <View style={iconWrapper}>
-                        <DownButton />
+                        <DownButton url={url} />
                     </View>
                 </View>
             </View>

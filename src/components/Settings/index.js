@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 export class Roku extends React.Component {
     selectDevice = () => {
-        this.props.selectDevice(this.props.url);
+        debugger;
     };
 
     render() {
@@ -18,12 +18,12 @@ export class Roku extends React.Component {
 
 export class Settings extends React.Component {
     render(){
-        const { rokus, selectedDevice, selectDevice } = this.props;
-        const rokuUrls = rokus.map(device => <Roku key={device.url} {...device} selectDevice={selectDevice} />);
+        const { rokus, device, selectDevice } = this.props;
+        const rokuUrls = rokus.map(url => <Roku key={url} url={url} selectDevice={selectDevice} />);
 
         return (
             <View>
-                <Text style={{color: '#fff'}}> Selected: {selectedDevice.url}</Text>
+                <Text style={{color: '#fff'}}> Selected: {device.url}</Text>
                 {rokuUrls}
             </View>
         );

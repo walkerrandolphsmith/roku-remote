@@ -1,5 +1,5 @@
 import React from 'react'
-import { Component } from 'react-native';
+import { View } from 'react-native';
 import App from './App';
 import Loading from './Loading';
 import { onLoad } from './../onLoad';
@@ -17,23 +17,28 @@ export default class Main extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = { isLoading: true };
+        this.state = {
+            isLoading: true,
+            device: null,
+            rokus: null
+        };
     }
 
     componentDidMount() {
-        onLoad().then(hasLoaded => {
-            this.setState({ isLoading: false });
-        });
+        this.load.bind(this)();
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.props.selectedDevice !== nextProps.selectedDevice) {
-            //Update State
-        }
-    }
+    load = async () => {
+        const state = await onLoad();
+        this.setState({
+            isLoading: false,
+            device:  state.device,
+            rokus: state.rokus
+        });
+    };
 
     render(){
-        const component = this.state.isLoading ? <Loading /> : <App {...this.props} />;
+        const component = this.state.isLoading ? <Loading /> : <App {...this.state} />;
         return (
             <View style={Main.defaultProps.style}>
                 {component}
