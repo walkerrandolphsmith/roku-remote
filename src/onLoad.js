@@ -1,40 +1,36 @@
+import { AsyncStorage } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
 const DOMParser = require('xmldom').DOMParser;
 
 const STATE = {
     rokus: [],
-    selectedDevice: 'http://10.0.0.8:8060/',
-    channels: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-    hotButtons: [12, 13, 46041, 2285]
+    selectedId: 'http://10.0.0.8:8060/',
+    device: {},
+    hotButtonIds: [12, 13, 46041, 2285]
 };
 
 const STORAGE_KEY = '@RokuRemote:key';
 
 const getRokuFromStorage = async () => {
     try {
-        const id = await AsyncStorage.getItem(STORAGE_KEY);
-    } catch(error) {
-        
-    }
+        return await AsyncStorage.getItem(STORAGE_KEY);
+    } catch(error) { return error; }
 };
 
-const saveRokuToStorage = async (id) => {
+const saveRokuToStorage = async (id, rokus) => {
     try {
-        await AsyncStorage.setItem(STORAGE_KEY, id);
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ selected: id, rokus: rokus }));
     } catch (error) {
         
     }
 };
 
-const getDeviceInfo = () => {
-    const url = STATE.selectedDevice;
-    const endpoint = `${url}query/device-info`;
-
-    return fetch(endpoint, {
+const getDeviceInfo = async (url) => {
+    return fetch(`${url}query/device-info`, {
         method: 'GET'
     }).then((res) => {
         return res.text().then(xml => {
-            return parseDeviceInfoResponse(xml);
+            return xml ? parseDeviceInfoResponse(xml) : xml;
         });
     });
 };
@@ -73,11 +69,8 @@ const parseAppsResponse = (xml) => {
     return channels;
 };
 
-const getApps = () => {
-    const url = STATE.selectedDevice;
-    const endpoint = `${url}query/apps`;
-
-    return fetch(endpoint, {
+const getApps = async (url) => {
+    return fetch(`${url}query/apps`, {
         method: 'GET'
     }).then((res) => {
         return res.text().then(xml => {
@@ -88,31 +81,31 @@ const getApps = () => {
     });
 };
 
-const getAppIcons = (channels) => {
-    const url = STATE.selectedDevice;
-
-    return channels.map(channel => {
+const getAppIcons = async (url, channels) => new Promise((resolve, reject) => {
+    const promises = channels.map(channel => {
         return RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`).then(res => {
             const base64Str = res.base64();
-            //update global
             return { id: channel.id, icon: base64Str };
         });
     });
-};
 
-const getDetails = () => {
-    return getApps().then(channels => {
-        return Promise.all(getAppIcons(channels)).then(icons => {
-            return { channels, icons };
-        }).catch(() => {
-            return false;
-        });
-    }).catch(appRetreivalFailure => {
-        return false;
+    Promise.all(promises).then(icons => {
+        resolve(icons);
+    }).catch(err => {
+        reject(err);
     });
+});
+
+const getDetails = async (url) => {
+    try {
+        const channels = await getApps(url);
+        return getAppIcons(url, channels).then(icons => {
+            return { channels, icons };
+        }).catch(err => err);
+    } catch(e) { return false; }
 };
 
-const broadcastSsdp = () => new Promise((resolve, reject) => {
+const search = async () => new Promise((resolve, reject) => {
     const dgram = require('react-native-udp');
     global.Buffer = global.Buffer || require('buffer').Buffer;
 
@@ -153,70 +146,68 @@ const broadcastSsdp = () => new Promise((resolve, reject) => {
     })
 });
 
-const findRokus = () => {
-    return broadcastSsdp().then((rokuUrls) => {
-        return rokuUrls.map(url => { url: url });
-    }).catch(rokusWereNotFound => {
-        return 'NO_ROKUS_FOUND';
-    })
+const findRokus = async () => {
+    return search();
 };
 
-const updateStateWithDetails = (details) => {
-    const selectedRoku = getSelectedDevice(STATE.rokus, STATE.selectedDevice);
-    selectedRoku.channels = details.channels;
+const updateStateWithRokus = (selectedId, rokus) => {
+    STATE.selectedId = selectedId;
+    STATE.rokus = rokus;
+};
+
+const getState = (details) => {
+    const { rokus, selectedId, device, hotButtonIds } = STATE;
+    device.url = selectedId;
+    device.channels = details.channels;
     details.icons.forEach(icon => {
-        const channel = selectedRoku.channels.find(channel => channel.id === icon.id);
+        const channel = device.channels.find(channel => channel.id === icon.id);
         channel.icon = icon.icon;
     });
+    device.hotButtons = device.channels.filter(channel => hotButtonIds.includes(parseInt(channel.id)));
+    return { device, rokus };
 };
 
-const getHotButtons = (channels, hotButtonIds) => channels
-    .filter(channel => hotButtonIds.includes(parseInt(channel.id)));
+export const onLoad = async () => {
+    const FAILED_TO_RETRIEVE_FROM_STORAGE = new Error('No data has been stored on this device');
+    const NO_ROKUS_FOUND_ERROR = new Error('No rokus are found on the network');
+    const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
 
-const getSelectedDevice = (rokus, selectedDeviceId) => rokus
-    .find(roku => roku.url === selectedDeviceId) || { url: selectedDeviceId, channels: [] };
+    try {
+        let storedData = await getRokuFromStorage();
+        if(storedData) {
+            storedData = JSON.parse(storedData);
+            updateStateWithRokus(storedData.selected, storedData.rokus);
 
-const getHydratedSelectedDevice = (selectedDevice) => {
-    const hotButtons = getHotButtons(selectedDevice.channels, STATE.hotButtons);
-    selectedDevice.hotButtons = hotButtons;
-    return selectedDevice;
-};
-
-export const onLoad = () => new Promise((resolve, reject) => {
-    getRokuFromStorage().then(foundRokuInStorage => {
-        STATE.selectedDevice = foundRokuInStorage;
-        getDeviceInfo().then(deviceInfo => {
-            //Device is reachable on the network
-            const selectedRoku = getSelectedDevice(STATE.rokus, STATE.selectedDevice);
-            selectedRoku.info = deviceInfo;
-            getDetails().then(details => {
-                updateStateWithDetails(details);
-                resolve(getHydratedSelectedDevice(STATE.rokus, STATE.selectedDevice));
-            });
-        }).catch(() => {
-            findRokus().then(rokus => {
+            const deviceInfo = await getDeviceInfo(STATE.selectedId);
+            if(deviceInfo) {
+                STATE.device.info = deviceInfo;
+                try {
+                    const details = await getDetails(STATE.selectedId);
+                    return getState(details);
+                } catch (error) { return DETAILS_ERROR; }
+            } else {
+                try {
+                    const rokus = await findRokus();
+                    const firstRokuFound = rokus[0];
+                    saveRokuToStorage(firstRokuFound, rokus);
+                    updateStateWithRokus(firstRokuFound, rokus);
+                    try {
+                        const details = await getDetails(STATE.selectedId);
+                        return getState(details);
+                    } catch (error) { return DETAILS_ERROR; }
+                } catch (error) { return NO_ROKUS_FOUND_ERROR; }
+            }
+        } else {
+            try {
+                const rokus = await findRokus();
                 const firstRokuFound = rokus[0];
-                saveRokuToStorage(firstRokuFound);
-                STATE.selectedDevice = firstRokuFound;
-                getDetails().then(details => {
-                    updateStateWithDetails(details);
-                    resolve(getHydratedSelectedDevice(STATE.rokus, STATE.selectedDevice));
-                });
-            }).catch(err => {
-                
-            });
-        });
-    }).catch(() => {
-        findRokus().then(rokus => {
-            const firstRokuFound = rokus[0];
-            saveRokuToStorage(firstRokuFound);
-            STATE.selectedDevice = firstRokuFound;
-            getDetails().then(details => {
-                updateStateWithDetails(details);
-                resolve(getHydratedSelectedDevice(STATE.rokus, STATE.selectedDevice));
-            });
-        }).catch(err => {
-
-        });
-    });
-});
+                saveRokuToStorage(firstRokuFound, rokus);
+                updateStateWithRokus(firstRokuFound, rokus);
+                try {
+                    const details = await getDetails(STATE.selectedId);
+                    return getState(details);
+                } catch (error) { return DETAILS_ERROR; }
+            } catch (error) { return NO_ROKUS_FOUND_ERROR; }
+        }
+    } catch (rokusNeverStored) { return FAILED_TO_RETRIEVE_FROM_STORAGE }
+};
