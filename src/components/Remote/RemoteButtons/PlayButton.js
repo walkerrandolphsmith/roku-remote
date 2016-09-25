@@ -9,7 +9,7 @@ export default class PlayButton extends AbstractButton {
     };
 
     childHandler = () => {
-        this.handler(this.props.PLAY);
+        this.handler('Play');
         this.setState({ isPaused: !this.state.isPaused })
     };
 

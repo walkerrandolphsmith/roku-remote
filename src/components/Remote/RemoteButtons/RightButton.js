@@ -4,7 +4,7 @@ import AbstractButton from './AbstractButton';
 
 export default class RightButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.RIGHT);
+        this.handler('Right');
     };
 
     render(){

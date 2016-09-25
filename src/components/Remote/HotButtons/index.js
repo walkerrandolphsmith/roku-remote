@@ -5,13 +5,12 @@ import styles from './index.styles';
 
 export class HotButtons extends React.Component {
     render(){
-        const { hotButtons, launchApp } = this.props;
-        const buttons = hotButtons.map((button, i) =>
-            <ChannelButton key={i} {...button} styles={styles} launchApp={launchApp} />
+        const hotButtons = this.props.hotButtons.map((button, i) =>
+            <ChannelButton key={i} {...button} styles={styles} />
         );
         return (
             <View style={styles.wrapper}>
-                {buttons}
+                {hotButtons}
             </View>
         );
     }

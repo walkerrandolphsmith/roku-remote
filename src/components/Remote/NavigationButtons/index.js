@@ -10,8 +10,6 @@ import {
 
 export class NavigationButtons extends React.Component {
     render(){
-        const { keys, keyPress } = this.props;
-
         const small = {
             borderWidth: 0.5,
             borderColor: '#d6d7da',
@@ -80,35 +78,34 @@ export class NavigationButtons extends React.Component {
             <View style={small}>
                 <View style={right}>
                     <View style={iconWrapper}>
-                        <RightButton keyPress={keyPress} { ...keys} />
+                        <RightButton />
                     </View>
                 </View>
 
                 <View style={left}>
                     <View style={iconWrapper}>
-                        <LeftButton keyPress={keyPress} { ...keys} />
+                        <LeftButton />
                     </View>
                 </View>
 
                 <View style={okWrapper}>
                     <View style={ok}>
-                        <OkButton keyPress={keyPress} { ...keys}/>
+                        <OkButton />
                     </View>
                 </View>
 
                 <View style={up}>
                     <View style={iconWrapper}>
-                        <UpButton keyPress={keyPress} { ...keys} />
+                        <UpButton />
                     </View>
                 </View>
 
                 <View style={down}>
                     <View style={iconWrapper}>
-                        <DownButton keyPress={keyPress} { ...keys} />
+                        <DownButton />
                     </View>
                 </View>
             </View>
         );
-
     }
 }

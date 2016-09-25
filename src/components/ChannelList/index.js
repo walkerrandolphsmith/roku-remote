@@ -8,13 +8,13 @@ export class ChannelList extends React.Component {
         super(props, context);
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
-            dataSource: ds.cloneWithRows(props.atom.channels)
+            dataSource: ds.cloneWithRows(props.channels)
         };
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows([...nextProps.atom.channels])
+            dataSource: this.state.dataSource.cloneWithRows([...nextProps.channels])
         });
     }
 
@@ -25,7 +25,7 @@ export class ChannelList extends React.Component {
                     contentContainerStyle={styles.grid}
                     enableEmptySections={true}
                     dataSource={this.state.dataSource}
-                    renderRow={(channel) => <ChannelButton {...channel} styles={styles} launchApp={this.props.launchApp} />}
+                    renderRow={(channel) => <ChannelButton {...channel} styles={styles} />}
                 />
             </View>
         );

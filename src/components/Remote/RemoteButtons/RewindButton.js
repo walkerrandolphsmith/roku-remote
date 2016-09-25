@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class RewindButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.REV);
+        this.handler('Rev');
     };
 
     render(){

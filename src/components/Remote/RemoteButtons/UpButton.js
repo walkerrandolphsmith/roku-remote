@@ -4,7 +4,7 @@ import AbstractButton from './AbstractButton';
 
 export default class UpButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.UP);
+        this.handler('Up');
     };
 
     render(){

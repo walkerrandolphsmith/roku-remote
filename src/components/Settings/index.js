@@ -18,12 +18,12 @@ export class Roku extends React.Component {
 
 export class Settings extends React.Component {
     render(){
-        const { atom, selectedDeviceHydrated, selectDevice } = this.props;
-        const rokuUrls = atom.rokus.map(device => <Roku key={device.url} {...device} selectDevice={selectDevice} />);
+        const { rokus, selectedDevice, selectDevice } = this.props;
+        const rokuUrls = rokus.map(device => <Roku key={device.url} {...device} selectDevice={selectDevice} />);
 
         return (
             <View>
-                <Text style={{color: '#fff'}}> Selected: {selectedDeviceHydrated.url}</Text>
+                <Text style={{color: '#fff'}}> Selected: {selectedDevice.url}</Text>
                 {rokuUrls}
             </View>
         );
