@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class FastForwardButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.FWD);
+        this.handler('Fwd');
     };
 
     render(){

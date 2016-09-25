@@ -9,17 +9,17 @@ import styles from './index.styles';
 
 export class ControlButtons extends React.Component {
     render(){
-        const { keys, keyPress } = this.props;
+        const { url } = this.props;
         return (
             <View style={styles.wrapper}>
                 <View>
-                    <RewindButton keyPress={keyPress} { ...keys} />
+                    <RewindButton url={url} />
                 </View>
                 <View style={styles.play}>
-                    <PlayButton keyPress={keyPress} { ...keys} />
+                    <PlayButton url={url} />
                 </View>
                 <View>
-                    <FastForwardButton keyPress={keyPress} { ...keys} />
+                    <FastForwardButton url={url} />
                 </View>
             </View>
         );

@@ -4,7 +4,7 @@ import AbstractButton from './AbstractButton';
 
 export default class OkButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.SELECT);
+        this.handler('Select');
     };
 
     render(){

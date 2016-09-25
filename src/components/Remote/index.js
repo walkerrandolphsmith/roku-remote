@@ -12,8 +12,7 @@ import { HotButtons } from './HotButtons';
 
 export class Remote extends React.Component {
     render(){
-        const { atom, keyPress, hotButtons, launchApp } = this.props;
-        const { keys } = atom;
+        const { device } = this.props;
 
         const largeWrapper = {
             flex: 1,
@@ -68,25 +67,25 @@ export class Remote extends React.Component {
                 <View style={largeWrapper}>
                     <View style={large}>
                         <View style={topLeft}>
-                            <BackButton keyPress={keyPress} { ...keys} />
+                            <BackButton url={device.url} />
                         </View>
                         <View style={topRight}>
-                            <HomeButton keyPress={keyPress} { ...keys} />
+                            <HomeButton url={device.url} />
                         </View>
-                        <NavigationButtons keyPress={keyPress} keys={keys} />
+                        <NavigationButtons {...device} />
                         <View style={bottomLeft}>
-                            <SearchButton keyPress={keyPress} { ...keys} />
+                            <SearchButton url={device.url} />
                         </View>
                         <View style={bottomRight}>
-                            <AsteriskButton keyPress={keyPress} { ...keys} />
+                            <AsteriskButton url={device.url} />
                         </View>
                     </View>
                 </View>
                 <View style={controlButtonStyles}>
-                    <ControlButtons keyPress={keyPress} keys={keys} />
+                    <ControlButtons {...device} />
                 </View>
                 <View style={hotButtonStyles}>
-                    <HotButtons hotButtons={hotButtons} launchApp={launchApp} />
+                    <HotButtons device={device} />
                 </View>
             </View>
         );

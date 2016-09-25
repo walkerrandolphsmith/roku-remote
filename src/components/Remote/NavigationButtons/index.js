@@ -10,7 +10,7 @@ import {
 
 export class NavigationButtons extends React.Component {
     render(){
-        const { keys, keyPress } = this.props;
+        const { url } = this.props;
 
         const small = {
             borderWidth: 0.5,
@@ -80,35 +80,34 @@ export class NavigationButtons extends React.Component {
             <View style={small}>
                 <View style={right}>
                     <View style={iconWrapper}>
-                        <RightButton keyPress={keyPress} { ...keys} />
+                        <RightButton url={url} />
                     </View>
                 </View>
 
                 <View style={left}>
                     <View style={iconWrapper}>
-                        <LeftButton keyPress={keyPress} { ...keys} />
+                        <LeftButton url={url} />
                     </View>
                 </View>
 
                 <View style={okWrapper}>
                     <View style={ok}>
-                        <OkButton keyPress={keyPress} { ...keys}/>
+                        <OkButton url={url} />
                     </View>
                 </View>
 
                 <View style={up}>
                     <View style={iconWrapper}>
-                        <UpButton keyPress={keyPress} { ...keys} />
+                        <UpButton url={url} />
                     </View>
                 </View>
 
                 <View style={down}>
                     <View style={iconWrapper}>
-                        <DownButton keyPress={keyPress} { ...keys} />
+                        <DownButton url={url} />
                     </View>
                 </View>
             </View>
         );
-
     }
 }

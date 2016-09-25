@@ -4,7 +4,7 @@ import AbstractButton from './AbstractButton';
 
 export default class SearchButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.SEARCH);
+        this.handler('Search');
     };
 
     render(){

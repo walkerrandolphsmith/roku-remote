@@ -1,16 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
 import { View, Text, Easing } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Swiper from 'react-native-swiper';
-import { actions, selectors } from './../shared/modules';
 import { Remote } from './Remote';
 import { ChannelList } from './ChannelList';
 import { Settings } from './Settings';
 import styles from './App.styles';
 
-class App extends React.Component {
+export default class App extends React.Component {
     render(){
         const dot= <View style={{backgroundColor:'rgba(168, 94, 245,0.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />
         const activeDot= <View style={{backgroundColor: '#A85EF5', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />
@@ -37,57 +34,3 @@ class App extends React.Component {
         );
     }
 }
-
-class Loading extends React.Component {
-    render() {
-        return (
-            <Animatable.View style={styles.loading}>
-                <View style={styles.loadingBall} />
-            </Animatable.View>
-        )
-    }
-}
-
-
-
-class _App extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = { isLoading: true };
-    }
-
-    componentDidMount() {
-        this.props.onLoad().then(hasLoaded => {
-            this.setState({ isLoading: false })
-        });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(this.props.selectedDevice !== nextProps.selectedDevice) {
-            this.props.getRokuDetails();
-            debugger;
-        }
-    }
-
-    render(){
-        const component = this.state.isLoading ? <Loading /> : <App {...this.props} />;
-        return (
-            <View style={styles.main}>
-                {component}
-            </View>
-        )
-    }
-}
-
-const mapStateToProps = (state) => {
-    const hotButtons = selectors.getHotButtons(state);
-    console.log(hotButtons);
-    const selectedDeviceHydrated = selectors.getSelectedDevice(state);
-    return { ...state, selectedDeviceHydrated, hotButtons };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(actions, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(_App);

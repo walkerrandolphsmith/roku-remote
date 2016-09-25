@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class BackButton extends AbstractButton {
     childHandler = () => {
-        this.handler(this.props.BACK);
+        this.handler('Back');
     };
 
     render(){

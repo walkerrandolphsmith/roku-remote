@@ -1,19 +1,48 @@
 import React from 'react'
-import { Component } from 'react-native';
-import { Provider } from 'react-redux';
-
+import { View } from 'react-native';
 import App from './App';
+import Loading from './Loading';
+import { onLoad } from './../onLoad';
 
-import createStore from './../shared/createStore'
+export default class Main extends React.Component {
+    static defaultProps = {
+        style: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#000',
+            height: 680
+        }
+    };
 
-const store = createStore();
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            isLoading: true,
+            device: null,
+            rokus: null
+        };
+    }
 
-const Main = () => {
-    return (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    )
-};
+    componentDidMount() {
+        this.load.bind(this)();
+    }
 
-export default Main
+    load = async () => {
+        const state = await onLoad();
+        this.setState({
+            isLoading: false,
+            device:  state.device,
+            rokus: state.rokus
+        });
+    };
+
+    render(){
+        const component = this.state.isLoading ? <Loading /> : <App {...this.state} />;
+        return (
+            <View style={Main.defaultProps.style}>
+                {component}
+            </View>
+        )
+    }
+}
