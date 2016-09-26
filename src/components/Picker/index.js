@@ -30,7 +30,6 @@ export class Picker extends React.Component {
 
         const selection = options.map(item => (
             <PickerIOS.Item
-                style={styles.item}
                 key={item}
                 value={item}
                 label={item}
@@ -45,6 +44,7 @@ export class Picker extends React.Component {
                     </TouchableHighlight>
                 </View>
                 <PickerIOS
+                    itemStyle={styles.item}
                     selectedValue={selected}
                     onValueChange={(item) => select(item)}>
                     {selection}
