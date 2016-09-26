@@ -1,54 +1,43 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-    loading: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#000',
-        height: 680
-    },
-    loadingBall: {
-        height: 225,
-        width: 225,
-        backgroundColor: '#A85EF5',
-        borderRadius: 225
-    },
-    wrapper: {
-
-    },
-    swiper: {
-
-    },
-    slide: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'transparent'
-    },
-
-    slide1: {
+    remote: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: '#000'
     },
 
-    slide2: {
+    channels: {
         flex: 1,
         alignItems: 'center',
         alignSelf: 'stretch',
         backgroundColor: '#000'
     },
 
-    slide3: {
+    settings: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#000'
     },
-
-    text: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold'
+    dot: {
+        backgroundColor:'rgba(168, 94, 245,0.5)',
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
+    },
+    activeDot: {
+        backgroundColor: '#A85EF5',
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
     }
 });
