@@ -35,7 +35,7 @@ const getDeviceInfo = async (url) => {
     });
 };
 
-const parseDeviceInfoResponse = (xml) => {
+export const parseDeviceInfoResponse = (xml) => {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xml);
     const specs = xmlDoc.getElementsByTagName('device-info')[0].childNodes;
