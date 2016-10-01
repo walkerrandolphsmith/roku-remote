@@ -25,15 +25,9 @@ const saveRokuToStorage = async (id, rokus) => {
     }
 };
 
-export const getDeviceInfo = async (url) => {
-    return fetch(`${url}query/device-info`, {
-        method: 'GET'
-    }).then((res) => {
-        return res.text().then(xml => {
-            return xml ? parseDeviceInfoResponse(xml) : xml;
-        });
-    });
-};
+export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
+        .then(res => res.text())
+        .then(xml => xml ? parseDeviceInfoResponse(xml) : xml);
 
 export const parseDeviceInfoResponse = (xml) => {
     const parser = new DOMParser();
@@ -69,32 +63,16 @@ export const parseAppsResponse = (xml) => {
     return channels;
 };
 
-const getApps = async (url) => {
-    return fetch(`${url}query/apps`, {
-        method: 'GET'
-    }).then((res) => {
-        return res.text().then(xml => {
-            return parseAppsResponse(xml);
-        });
-    }).catch(err => {
+const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
+    .then(res => res.text())
+    .then(xml => parseAppsResponse(xml));
 
-    });
-};
-
-const getAppIcons = async (url, channels) => new Promise((resolve, reject) => {
-    const promises = channels.map(channel => {
-        return RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`).then(res => {
-            const base64Str = res.base64();
-            return { id: channel.id, icon: base64Str };
-        });
-    });
-
-    Promise.all(promises).then(icons => {
-        resolve(icons);
-    }).catch(err => {
-        reject(err);
-    });
-});
+const getAppIcons = async (url, channels) => Promise.all(
+    channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
+        .then(res => res.base64())
+        .then(uri => ({ id: channel.id, icon: uri }))
+    )
+);
 
 const getDetails = async (url) => {
     try {
