@@ -9,17 +9,6 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 60
-    },
-    button: {
-        marginTop:25,
-        marginBottom:25
-    },
-    buttonText: {
-        textAlign: 'center'
-    },
     closeButtonContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
@@ -71,13 +60,13 @@ export class Picker extends React.Component {
 
         return (
             <Animated.View style={{ transform: [{translateY: this.props.offSet}] }}>
-                <View style={{}}>
-                    <TouchableHighlight onPress={this.closeModal.bind(this)} underlayColor="transparent" style={{}}>
-                        <Text style={{}}>Choose</Text>
+                <View style={styles.closeButtonContainer}>
+                    <TouchableHighlight onPress={this.closeModal.bind(this)} underlayColor="transparent" style={styles.closeButton}>
+                        <Text style={styles.closeButtonText}>Choose</Text>
                     </TouchableHighlight>
                 </View>
                 <PickerIOS
-                    itemStyle={{}}
+                    itemStyle={styles.item}
                     selectedValue={selected}
                     onValueChange={(item) => select(item)}>
                     {selection}
