@@ -25,7 +25,7 @@ const saveRokuToStorage = async (id, rokus) => {
     }
 };
 
-const getDeviceInfo = async (url) => {
+export const getDeviceInfo = async (url) => {
     return fetch(`${url}query/device-info`, {
         method: 'GET'
     }).then((res) => {
