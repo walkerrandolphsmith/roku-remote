@@ -21,7 +21,7 @@ const saveRokuToStorage = async (id, rokus) => {
     try {
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ selected: id, rokus: rokus }));
     } catch (error) {
-        
+
     }
 };
 
@@ -52,7 +52,7 @@ export const parseDeviceInfoResponse = (xml) => {
     }, {});
 };
 
-const parseAppsResponse = (xml) => {
+export const parseAppsResponse = (xml) => {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xml);
     const appTag = xmlDoc.getElementsByTagName('app');
@@ -77,7 +77,7 @@ const getApps = async (url) => {
             return parseAppsResponse(xml);
         });
     }).catch(err => {
-        
+
     });
 };
 
