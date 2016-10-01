@@ -1,11 +1,24 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
     FastForwardButton,
     RewindButton,
     PlayButton
 } from './../RemoteButtons';
-import styles from './index.styles';
+
+const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection:'row',
+        height: 50
+    },
+    play: {
+        marginLeft: 80,
+        marginRight: 80
+    }
+});
 
 export class ControlButtons extends React.Component {
     render(){

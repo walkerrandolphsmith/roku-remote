@@ -1,7 +1,32 @@
 import React from 'react';
-import { View, ListView } from 'react-native';
+import { View, ListView, StyleSheet, Image } from 'react-native';
 import { ChannelButton } from './../ChannelButton';
-import styles from './index.styles';
+
+const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    grid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    channel: {
+        flexDirection: 'row'
+    },
+    iconWrapper: {
+        flex: 1,
+        width: 100,
+        height: 100,
+        margin: 10
+    },
+    icon: {
+        width: 100,
+        height: 100,
+        resizeMode: Image.resizeMode.contain
+    }
+});
 
 export class ChannelList extends React.Component {
     constructor(props, context) {

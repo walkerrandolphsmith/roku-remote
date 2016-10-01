@@ -1,7 +1,26 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { ChannelButton } from './../../ChannelButton';
-import styles from './index.styles';
+
+const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        margin: 10
+    },
+    iconWrapper: {
+
+    },
+    icon: {
+        width: 120,
+        height: 80,
+        resizeMode: Image.resizeMode.contain,
+        marginBottom: 10
+    }
+});
 
 export class HotButtons extends React.Component {
     render(){

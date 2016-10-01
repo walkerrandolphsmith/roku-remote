@@ -4,10 +4,28 @@ import {
     Text,
     TouchableHighlight,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    StyleSheet
 } from 'react-native';
 import { Picker } from './../Picker';
-import styles from './index.styles';
+
+const styles = StyleSheet.create({
+    container: {
+
+    },
+    button: {
+
+    },
+    buttonText: {
+        color: '#FFF'
+    },
+    selectedWrapper: {
+
+    },
+    selected: {
+        color: '#FFF'
+    }
+});
 
 export class Settings extends React.Component {
     constructor(props, context) {

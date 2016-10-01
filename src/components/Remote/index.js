@@ -1,10 +1,59 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { ControlButtons } from './ControlButtons';
 import { NavigationButtons } from './NavigationButtons';
 import { AsteriskButton, BackButton, HomeButton, SearchButton } from './RemoteButtons';
 import { HotButtons } from './HotButtons';
-import styles from './index.styles';
+
+const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 30
+    },
+
+    large: {
+        width: 280,
+        height: 280,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    topLeft: {
+        position: 'absolute',
+        left: 25,
+        top: 25
+    },
+
+    topRight: {
+        position: 'absolute',
+        right: 25,
+        top: 25
+    },
+
+    bottomLeft: {
+        position: 'absolute',
+        left: 25,
+        bottom: 25
+    },
+
+    bottomRight: {
+        position: 'absolute',
+        right: 25,
+        bottom: 25
+    },
+
+    controlButtons: {
+        height: 50,
+        marginBottom: 10
+    },
+
+    hotButtons: {
+        height: 180
+    }
+});
 
 export class Remote extends React.Component {
     render(){
