@@ -1,0 +1,3 @@
+--compilers js:test_utils/compile.js
+--require test_utils/setup.js
+--require babel-polyfill
