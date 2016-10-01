@@ -15,4 +15,14 @@ describe('Given xml response from querying app info', () => {
     it('should return an array', () => {
         expect(actual).to.be.instanceOf(Array);
     });
+    describe('When an array is returned', () => {
+        it('should contain only objects', () => {
+            expect(actual).to.have.all.instanceOf(Object);
+        });
+        it('should have objects that have an name, id, type, and version property', () => {
+            for(var i = 0; i < actual.length; i++) {
+                    expect(actual[i]).to.have.all.keys(['name', 'id', 'type', 'version']);
+            }
+        });
+    });
 });
