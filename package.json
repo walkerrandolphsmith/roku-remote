@@ -33,9 +33,10 @@
     "babel-core": "^6.16.0",
     "babel-plugin-rewire": "^1.0.0",
     "babel-preset-react-native": "^1.9.0",
-    "expect": "^1.20.2",
+    "chai": "^3.5.0",
     "mocha": "^3.1.0",
-    "react-test-renderer": "^15.3.2"
+    "react-test-renderer": "^15.3.2",
+    "sinon": "^1.17.6"
   },
   "babel": {
     "presets": [
