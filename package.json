@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "mocha --opts test_utils/mocha.opts src/**/*.spec.js"
+    "test": "mocha --opts test_utils/mocha.opts src/**/*.spec.js",
+    "link": "react-native link",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android"
   },
   "keywords": [
     "roku"
