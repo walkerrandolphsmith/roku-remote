@@ -11,14 +11,6 @@ const STATE = {
 
 const STORAGE_KEY = '@RokuRemote:key';
 
-export const saveRokuToStorage = async (storage, key, id, rokus) => {
-    try {
-        await storage.setItem(key, JSON.stringify({ selected: id, rokus: rokus }));
-    } catch (error) {
-
-    }
-};
-
 export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
         .then(res => res.text())
         .then(xml => xml ? parseDeviceInfoResponse(xml) : xml);
@@ -119,12 +111,49 @@ const search = async () => new Promise((resolve, reject) => {
 });
 
 const findRokus = async () => {
-    return search();
+    const NO_ROKUS_FOUND_ERROR = new Error('No rokus are found on the network');
+    const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
+    try {
+        const rokus = await search();
+        try {
+            STATE.selectedId = rokus[0];
+            STATE.rokus = rokus;
+            return await getDetails(STATE.selectedId);
+        } catch (error) {
+            return DETAILS_ERROR;
+        }
+    } catch (error) {
+        return NO_ROKUS_FOUND_ERROR;
+    }
 };
 
-const updateStateWithRokus = (selectedId, rokus) => {
-    STATE.selectedId = selectedId;
-    STATE.rokus = rokus;
+const getData = async () => {
+    const FAILED_TO_RETRIEVE_FROM_STORAGE = new Error('No data has been stored on this device');
+    const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
+
+    try {
+        let storedData = await AsyncStorage.getItem(STORAGE_KEY);
+        if(storedData) {
+            const { selected, rokus } = JSON.parse(storedData);
+            const deviceInfo = await getDeviceInfo(selected);
+            if(deviceInfo) {
+                try {
+                    STATE.device.info = deviceInfo;
+                    STATE.selectedId = selected;
+                    STATE.rokus = rokus;
+                    return await getDetails(selected);
+                } catch (error) {
+                    return DETAILS_ERROR;
+                }
+            } else {
+                return await findRokus();
+            }
+        } else {
+            return await findRokus();
+        }
+    } catch (error) {
+        return FAILED_TO_RETRIEVE_FROM_STORAGE
+    }
 };
 
 const getState = (details) => {
@@ -140,46 +169,10 @@ const getState = (details) => {
 };
 
 export const onLoad = async () => {
-    const FAILED_TO_RETRIEVE_FROM_STORAGE = new Error('No data has been stored on this device');
-    const NO_ROKUS_FOUND_ERROR = new Error('No rokus are found on the network');
-    const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
-
-    try {
-        let storedData = await AsyncStorage.getItem(STORAGE_KEY);
-        if(storedData) {
-            storedData = JSON.parse(storedData);
-            updateStateWithRokus(storedData.selected, storedData.rokus);
-
-            const deviceInfo = await getDeviceInfo(STATE.selectedId);
-            if(deviceInfo) {
-                STATE.device.info = deviceInfo;
-                try {
-                    const details = await getDetails(STATE.selectedId);
-                    return getState(details);
-                } catch (error) { return DETAILS_ERROR; }
-            } else {
-                try {
-                    const rokus = await findRokus();
-                    const firstRokuFound = rokus[0];
-                    saveRokuToStorage(AsyncStorage, STORAGE_KEY, firstRokuFound, rokus);
-                    updateStateWithRokus(firstRokuFound, rokus);
-                    try {
-                        const details = await getDetails(STATE.selectedId);
-                        return getState(details);
-                    } catch (error) { return DETAILS_ERROR; }
-                } catch (error) { return NO_ROKUS_FOUND_ERROR; }
-            }
-        } else {
-            try {
-                const rokus = await findRokus();
-                const firstRokuFound = rokus[0];
-                saveRokuToStorage(AsyncStorage, STORAGE_KEY, firstRokuFound, rokus);
-                updateStateWithRokus(firstRokuFound, rokus);
-                try {
-                    const details = await getDetails(STATE.selectedId);
-                    return getState(details);
-                } catch (error) { return DETAILS_ERROR; }
-            } catch (error) { return NO_ROKUS_FOUND_ERROR; }
-        }
-    } catch (rokusNeverStored) { return FAILED_TO_RETRIEVE_FROM_STORAGE }
+    let state = await getData();
+    if(!state.message) {
+        state = getState(state);
+        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+    return state;
 };
