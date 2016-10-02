@@ -127,18 +127,11 @@ const getData = async () => {
 
     try {
         let storedData = await AsyncStorage.getItem(STORAGE_KEY);
+        storedData = JSON.parse(storedData);
         if(storedData) {
-            const { selected, rokus } = JSON.parse(storedData);
-            const deviceInfo = await getDeviceInfo(selected);
+            const deviceInfo = await getDeviceInfo(storedData.device.url);
             if(deviceInfo) {
-                try {
-                    STATE.device.info = deviceInfo;
-                    STATE.selectedId = selected;
-                    STATE.rokus = rokus;
-                    return await getChannels(selected);
-                } catch (error) {
-                    return DETAILS_ERROR;
-                }
+                return { fromStorage: true, ...storedData };
             } else {
                 return await findRokus();
             }
@@ -160,7 +153,7 @@ const getState = (channels) => {
 
 export const onLoad = async () => {
     let state = await getData();
-    if(!state.message) {
+    if(!state.message && !state.fromStorage) {
         state = getState(state);
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
