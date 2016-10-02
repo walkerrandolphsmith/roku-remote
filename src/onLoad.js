@@ -11,15 +11,9 @@ const STATE = {
 
 const STORAGE_KEY = '@RokuRemote:key';
 
-export const getRokuFromStorage = async (AsyncStorage, key) => {
+export const saveRokuToStorage = async (storage, key, id, rokus) => {
     try {
-        return await AsyncStorage.getItem(key);
-    } catch(error) { return error; }
-};
-
-const saveRokuToStorage = async (id, rokus) => {
-    try {
-        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ selected: id, rokus: rokus }));
+        await storage.setItem(key, JSON.stringify({ selected: id, rokus: rokus }));
     } catch (error) {
 
     }
@@ -151,7 +145,7 @@ export const onLoad = async () => {
     const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
 
     try {
-        let storedData = await getRokuFromStorage(AsyncStorage, STORAGE_KEY);
+        let storedData = await AsyncStorage.getItem(STORAGE_KEY);
         if(storedData) {
             storedData = JSON.parse(storedData);
             updateStateWithRokus(storedData.selected, storedData.rokus);
@@ -167,7 +161,7 @@ export const onLoad = async () => {
                 try {
                     const rokus = await findRokus();
                     const firstRokuFound = rokus[0];
-                    saveRokuToStorage(firstRokuFound, rokus);
+                    saveRokuToStorage(AsyncStorage, STORAGE_KEY, firstRokuFound, rokus);
                     updateStateWithRokus(firstRokuFound, rokus);
                     try {
                         const details = await getDetails(STATE.selectedId);
@@ -179,7 +173,7 @@ export const onLoad = async () => {
             try {
                 const rokus = await findRokus();
                 const firstRokuFound = rokus[0];
-                saveRokuToStorage(firstRokuFound, rokus);
+                saveRokuToStorage(AsyncStorage, STORAGE_KEY, firstRokuFound, rokus);
                 updateStateWithRokus(firstRokuFound, rokus);
                 try {
                     const details = await getDetails(STATE.selectedId);
