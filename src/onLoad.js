@@ -56,18 +56,12 @@ const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
 const getAppIcons = async (url, channels) => Promise.all(
     channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
         .then(res => res.base64())
-        .then(uri => ({ id: channel.id, icon: uri }))
+        .then(uri => ({ ...channel, icon: uri }))
     )
 );
 
-const getDetails = async (url) => {
-    try {
-        const channels = await getApps(url);
-        return getAppIcons(url, channels).then(icons => {
-            return { channels, icons };
-        }).catch(err => err);
-    } catch(e) { return false; }
-};
+const getChannels = async (url) => getApps(url)
+    .then(channels => getAppIcons(url, channels));
 
 const search = async () => new Promise((resolve, reject) => {
     const dgram = require('react-native-udp');
@@ -118,7 +112,7 @@ const findRokus = async () => {
         try {
             STATE.selectedId = rokus[0];
             STATE.rokus = rokus;
-            return await getDetails(STATE.selectedId);
+            return await getChannels(STATE.selectedId);
         } catch (error) {
             return DETAILS_ERROR;
         }
@@ -141,7 +135,7 @@ const getData = async () => {
                     STATE.device.info = deviceInfo;
                     STATE.selectedId = selected;
                     STATE.rokus = rokus;
-                    return await getDetails(selected);
+                    return await getChannels(selected);
                 } catch (error) {
                     return DETAILS_ERROR;
                 }
@@ -156,14 +150,10 @@ const getData = async () => {
     }
 };
 
-const getState = (details) => {
+const getState = (channels) => {
     const { rokus, selectedId, device, hotButtonIds } = STATE;
     device.url = selectedId;
-    device.channels = details.channels;
-    details.icons.forEach(icon => {
-        const channel = device.channels.find(channel => channel.id === icon.id);
-        channel.icon = icon.icon;
-    });
+    device.channels = channels;
     device.hotButtons = device.channels.filter(channel => hotButtonIds.includes(parseInt(channel.id)));
     return { device, rokus };
 };
