@@ -21,7 +21,7 @@ describe('Given xml response from querying app info', () => {
         });
         it('should have objects that have an name, id, type, and version property', () => {
             for(var i = 0; i < actual.length; i++) {
-                    expect(actual[i]).to.have.all.keys(['name', 'id', 'type', 'version']);
+                expect(actual[i]).to.have.all.keys(['name', 'id', 'type', 'version']);
             }
         });
     });

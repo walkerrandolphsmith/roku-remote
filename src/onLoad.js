@@ -11,9 +11,9 @@ const STATE = {
 
 const STORAGE_KEY = '@RokuRemote:key';
 
-const getRokuFromStorage = async () => {
+export const getRokuFromStorage = async (AsyncStorage, key) => {
     try {
-        return await AsyncStorage.getItem(STORAGE_KEY);
+        return await AsyncStorage.getItem(key);
     } catch(error) { return error; }
 };
 
@@ -151,7 +151,7 @@ export const onLoad = async () => {
     const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
 
     try {
-        let storedData = await getRokuFromStorage();
+        let storedData = await getRokuFromStorage(AsyncStorage, STORAGE_KEY);
         if(storedData) {
             storedData = JSON.parse(storedData);
             updateStateWithRokus(storedData.selected, storedData.rokus);

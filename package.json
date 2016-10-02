@@ -33,15 +33,18 @@
     "xmldom": "^0.1.22"
   },
   "devDependencies": {
+    "asyncstorage-mock": "^1.0.1",
     "babel-core": "^6.16.0",
     "babel-plugin-rewire": "^1.0.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-react-native": "^1.9.0",
+    "babel-runtime": "^6.11.6",
     "chai": "^3.5.0",
     "fetch-mock": "^5.1.5",
     "mocha": "^3.1.0",
     "react-test-renderer": "^15.3.2",
-    "sinon": "^1.17.6"
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   },
   "babel": {
     "presets": [
