@@ -5,13 +5,6 @@ import Config from 'react-native-config'
 
 const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
-const STATE = {
-    rokus: [],
-    selectedId: 'http://10.0.0.8:8060/',
-    device: {},
-    hotButtonIds: [12, 13, 46041, 2285]
-};
-
 const STORAGE_KEY = IS_STORAGE_ENABLED ? '@RokuRemote:key' : '@RokuRemote:SAVE_DISABLED';
 
 export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
@@ -108,23 +101,18 @@ const search = async () => new Promise((resolve, reject) => {
 });
 
 const findRokus = async () => {
-    const rokus = await search();
-    if(rokus.length > 0) {
-        try {
-            STATE.selectedId = rokus[0];
-            STATE.rokus = rokus;
-            return await getChannels(STATE.selectedId);
-        } catch (error) {
+    return search().then(rokus => {
+        if(rokus.length > 0) {
+            return getChannels(rokus[0]).then(channels => ({ channels, rokus }))
+        } else {
             return new Error('Error occured while talking with the roku.');
         }
-    } else {
-        return new Error('No rokus are found on the network');
-    }
+    }).catch(() => {
+        return new Error('No rokus are found on the network.');
+    });
 };
 
 const getData = async () => {
-    const FAILED_TO_RETRIEVE_FROM_STORAGE = new Error('No data has been stored on this device');
-
     try {
         let storedData = await AsyncStorage.getItem(STORAGE_KEY);
         storedData = JSON.parse(storedData);
@@ -139,17 +127,18 @@ const getData = async () => {
             return await findRokus();
         }
     } catch (error) {
-        return FAILED_TO_RETRIEVE_FROM_STORAGE
+        return new Error('An error occured remembering your preferences.');
     }
 };
 
-const getState = (channels) => {
-    const { rokus, selectedId, device, hotButtonIds } = STATE;
-    device.url = selectedId;
-    device.channels = channels;
-    device.hotButtons = device.channels.filter(channel => hotButtonIds.includes(parseInt(channel.id)));
-    return { device, rokus };
-};
+const getHotButtons = (ids, channels) => channels.filter(channel => ids.includes(channel.id));
+
+const getState = ({ channels, rokus }) => ({
+    rokus: rokus,
+    url: rokus[0],
+    channels: channels,
+    hotButtons: getHotButtons(['12', '13', '46041', '2285'], channels)
+});
 
 export const onLoad = async () => {
     let state = await getData();
