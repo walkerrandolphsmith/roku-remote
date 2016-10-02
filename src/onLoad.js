@@ -1,6 +1,9 @@
 import { AsyncStorage } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
 const DOMParser = require('xmldom').DOMParser;
+import Config from 'react-native-config'
+
+const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
 const STATE = {
     rokus: [],
@@ -9,7 +12,7 @@ const STATE = {
     hotButtonIds: [12, 13, 46041, 2285]
 };
 
-const STORAGE_KEY = '@RokuRemote:key';
+const STORAGE_KEY = IS_STORAGE_ENABLED ? '@RokuRemote:key' : '@RokuRemote:SAVE_DISABLED';
 
 export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
         .then(res => res.text())
@@ -155,7 +158,9 @@ export const onLoad = async () => {
     let state = await getData();
     if(!state.message && !state.fromStorage) {
         state = getState(state);
-        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        if(IS_STORAGE_ENABLED) {
+            AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
     }
     return state;
 };

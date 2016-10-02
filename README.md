@@ -24,6 +24,13 @@ Run unit tests:
 npm test
 ```
 
+### Configure
+Create a `.env` file in the root directory.
+```
+                                        # ABSENCE OF THIS KEY ENABLES STORAGE
+IS_STORAGE_DISABLED=true                # Saving to AsyncStorage is disabled
+```
+
 ### Run
 Run the simulator using:
 

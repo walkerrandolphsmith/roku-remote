@@ -126,6 +126,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-config')
     compile project(':rn-splash-screen')
     compile project(':react-native-vector-icons')
     compile project(':react-native-fetch-blob')

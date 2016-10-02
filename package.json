@@ -25,6 +25,7 @@
     "react": "15.3.1",
     "react-native": "0.33.0",
     "react-native-animatable": "^0.6.1",
+    "react-native-config": "^0.1.0",
     "react-native-fetch-blob": "0.9.5-beta.4",
     "react-native-ssdp": "^2.7.5",
     "react-native-swiper": "^1.4.11",
