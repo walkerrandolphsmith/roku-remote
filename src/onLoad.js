@@ -108,25 +108,22 @@ const search = async () => new Promise((resolve, reject) => {
 });
 
 const findRokus = async () => {
-    const NO_ROKUS_FOUND_ERROR = new Error('No rokus are found on the network');
-    const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
-    try {
-        const rokus = await search();
+    const rokus = await search();
+    if(rokus.length > 0) {
         try {
             STATE.selectedId = rokus[0];
             STATE.rokus = rokus;
             return await getChannels(STATE.selectedId);
         } catch (error) {
-            return DETAILS_ERROR;
+            return new Error('Error occured while talking with the roku.');
         }
-    } catch (error) {
-        return NO_ROKUS_FOUND_ERROR;
+    } else {
+        return new Error('No rokus are found on the network');
     }
 };
 
 const getData = async () => {
     const FAILED_TO_RETRIEVE_FROM_STORAGE = new Error('No data has been stored on this device');
-    const DETAILS_ERROR = new Error('There was a hiccup getting details about this roku.');
 
     try {
         let storedData = await AsyncStorage.getItem(STORAGE_KEY);
