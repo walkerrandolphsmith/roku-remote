@@ -11,6 +11,9 @@ require.extensions['.js'] = function (module, fileName) {
     if (fileName.indexOf('node_modules/react-native-fetch-blob') >= 0) {
         fileName = path.resolve('./test_utils/mocks/react-native-fetch-blob.js');
     }
+    if(fileName.indexOf('node_modules/react-native-config') >=0) {
+        fileName = path.resolve('./test_utils/mocks/react-native-config.js');
+    }
     if (fileName.indexOf('node_modules/') >= 0) {
         return (origJs || require.extensions['.js'])(module, fileName);
     }
