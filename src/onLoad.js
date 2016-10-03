@@ -118,7 +118,7 @@ const getData = async () => {
     }
 };
 
-const getHotButtons = (ids, channels) => channels.filter(channel => ids.includes(channel.id));
+export const getHotButtons = (ids, channels) => channels.filter(channel => ids.includes(channel.id));
 
 const getState = ({ channels, rokus }) => ({
     rokus: rokus,
