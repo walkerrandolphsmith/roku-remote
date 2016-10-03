@@ -1,4 +1,4 @@
-import { parseAppsResponse } from './onLoad';
+import { parseAppsResponse } from './../src/onLoad';
 
 describe('Given xml response from querying app info', () => {
     let actual;

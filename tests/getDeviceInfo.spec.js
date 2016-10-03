@@ -1,4 +1,4 @@
-import { getDeviceInfo } from './onLoad';
+import { getDeviceInfo } from './../src/onLoad';
 import fetchMock from 'fetch-mock';
 
 describe('given the root url', () => {

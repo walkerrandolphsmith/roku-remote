@@ -1,4 +1,4 @@
-import { parseDeviceInfoResponse } from './onLoad';
+import { parseDeviceInfoResponse } from './../src/onLoad';
 
 describe('Given xml from querying device info', () => {
     let xml;
