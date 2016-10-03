@@ -120,7 +120,7 @@ const getData = async () => {
 
 export const getHotButtons = (ids, channels) => channels.filter(channel => ids.includes(channel.id));
 
-const getState = ({ channels, rokus }) => ({
+export const getState = ({ channels, rokus }, getHotButtons) => ({
     rokus: rokus,
     url: rokus[0],
     device: {
@@ -132,7 +132,7 @@ const getState = ({ channels, rokus }) => ({
 export const onLoad = async () => {
     let state = await getData();
     if(!state.message && !state.fromStorage) {
-        state = getState(state);
+        state = getState(state, getHotButtons);
         if(IS_STORAGE_ENABLED) {
             AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         }
