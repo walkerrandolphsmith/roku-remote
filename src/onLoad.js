@@ -46,19 +46,15 @@ export const parseAppsResponse = (xml) => {
     return channels;
 };
 
-const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
+const getChannels = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
     .then(res => res.text())
-    .then(xml => parseAppsResponse(xml));
-
-const getAppIcons = async (url, channels) => Promise.all(
-    channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
-        .then(res => res.base64())
-        .then(uri => ({ ...channel, icon: uri }))
-    )
-);
-
-const getChannels = async (url) => getApps(url)
-    .then(channels => getAppIcons(url, channels));
+    .then(xml => parseAppsResponse(xml))
+    .then(channels => Promise.all(
+        channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
+            .then(res => res.base64())
+            .then(uri => ({ ...channel, icon: uri }))
+        )
+    ));
 
 const search = async () => new Promise((resolve, reject) => {
     const dgram = require('react-native-udp');
