@@ -7,10 +7,6 @@ const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
 const STORAGE_KEY = IS_STORAGE_ENABLED ? '@RokuRemote:key' : '@RokuRemote:SAVE_DISABLED';
 
-export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
-        .then(res => res.text())
-        .then(xml => xml ? parseDeviceInfoResponse(xml) : xml);
-
 export const parseDeviceInfoResponse = (xml) => {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xml);
@@ -27,6 +23,11 @@ export const parseDeviceInfoResponse = (xml) => {
         return deviceInfo
     }, {});
 };
+
+export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
+    .then(res => res.text())
+    .then(xml => parseDeviceInfoResponse(xml));
+
 
 export const parseAppsResponse = (xml) => {
     const parser = new DOMParser();
