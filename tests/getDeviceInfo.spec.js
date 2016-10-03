@@ -8,7 +8,7 @@ describe('src/onLoad/getDeviceInfo', () => {
             rootUrl = 'rootUrl/';
             urlPattern = /rootUrl\/query\/device-info/;
         });
-    
+
         afterEach(() => {
             fetchMock.restore();
         });
@@ -23,6 +23,6 @@ describe('src/onLoad/getDeviceInfo', () => {
                 expect(fetchMock.called(urlPattern)).to.equal(true);
             });
         });
-    
+
     });
 });
