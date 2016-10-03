@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
 const DOMParser = require('xmldom').DOMParser;
-import Config from 'react-native-config'
+import Config from 'react-native-config';
 
 const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
@@ -136,8 +136,10 @@ const getHotButtons = (ids, channels) => channels.filter(channel => ids.includes
 const getState = ({ channels, rokus }) => ({
     rokus: rokus,
     url: rokus[0],
-    channels: channels,
-    hotButtons: getHotButtons(['12', '13', '46041', '2285'], channels)
+    device: {
+        channels: channels,
+        hotButtons: getHotButtons(['12', '13', '46041', '2285'], channels)
+    }
 });
 
 export const onLoad = async () => {
