@@ -1,12 +1,13 @@
 import { getDeviceInfo } from './../src/onLoad';
 import fetchMock from 'fetch-mock';
 
-describe('src/onLoad/getDeviceInfo', () => {
+xdescribe('src/onLoad/getDeviceInfo', () => {
     describe('Given the root url', () => {
-        let rootUrl, urlPattern;
+        let url, urlPattern;
         beforeEach(() => {
-            rootUrl = 'rootUrl/';
-            urlPattern = /rootUrl\/query\/device-info/;
+            url = 'url/';
+            urlPattern = /url\/query\/device-info/;
+            fetchMock.mock(urlPattern, 200);
         });
 
         afterEach(() => {
@@ -14,12 +15,11 @@ describe('src/onLoad/getDeviceInfo', () => {
         });
 
         describe('When querying for device info', () => {
-            beforeEach(() => {
-                fetchMock.mock(urlPattern, 200);
-                getDeviceInfo(rootUrl);
+            beforeEach((done) => {
+                getDeviceInfo(url).then(res => done());
             });
 
-            it('Then it should call fetch with the rootUrl/query/device-info', () => {
+            it('Then it should call fetch with the url/query/device-info', () => {
                 expect(fetchMock.called(urlPattern)).to.equal(true);
             });
         });
