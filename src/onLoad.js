@@ -50,7 +50,7 @@ const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
     .then(res => res.text())
     .then(xml => parseAppsResponse(xml));
 
-const getAppIcons = async (url, channels) => Promise.all(
+export const getAppIcons = async (url, channels) => Promise.all(
     channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
         .then(res => res.base64())
         .then(uri => ({ ...channel, icon: uri }))
