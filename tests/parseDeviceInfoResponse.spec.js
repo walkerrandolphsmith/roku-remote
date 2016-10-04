@@ -1,4 +1,5 @@
-import { parseDeviceInfoResponse } from './../src/onLoad';
+import parseDeviceInfoResponse from './../src/parseDeviceInfoResponse';
+const DOMParser = require('xmldom').DOMParser;
 
 describe('src/onLoad/parseDeviceInfoResponse', () => {
     describe('Given xml from querying device info', () => {
@@ -6,13 +7,13 @@ describe('src/onLoad/parseDeviceInfoResponse', () => {
         let actual;
     
         beforeEach(() => {
-            xml = `
+            xml = new DOMParser().parseFromString(`
     <?xml version="1.0" encoding="UTF8" ?>
     <device-info>
         <udn>29a40003680710ef800f000000000000</udn>
         <serialnumber>YY003J519951</serialnumber>
     </device-info>
-    `;
+    `);
         });
     
         describe('When parsing the device info into json', () => {

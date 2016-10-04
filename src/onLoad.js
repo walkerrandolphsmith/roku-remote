@@ -1,31 +1,11 @@
 import { AsyncStorage } from 'react-native';
-const DOMParser = require('xmldom').DOMParser;
 import Config from 'react-native-config';
+import getChannels from './getChannels';
+import getDeviceInfo from './getDeviceInfo';
 
 const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
 const STORAGE_KEY = IS_STORAGE_ENABLED ? '@RokuRemote:key' : '@RokuRemote:SAVE_DISABLED';
-
-export const parseDeviceInfoResponse = (xml) => {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xml);
-    const specs = xmlDoc.getElementsByTagName('device-info')[0].childNodes;
-    const onlyElements = [];
-    for(let i = 0; i < specs.length; i++) {
-        if(specs[i].tagName) {
-            onlyElements.push(specs[i]);
-        }
-    }
-
-    return onlyElements.reduce((deviceInfo, node) => {
-        deviceInfo[node.tagName] = node.childNodes[0] ? node.childNodes[0].data : '';
-        return deviceInfo
-    }, {});
-};
-
-export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
-    .then(res => res.text())
-    .then(xml => parseDeviceInfoResponse(xml));
 
 const getQuery = () => {
     global.Buffer = global.Buffer || require('buffer').Buffer;
