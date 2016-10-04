@@ -46,7 +46,7 @@ export const parseAppsResponse = (xml) => {
     return channels;
 };
 
-const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
+export const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
     .then(res => res.text())
     .then(xml => parseAppsResponse(xml));
 
