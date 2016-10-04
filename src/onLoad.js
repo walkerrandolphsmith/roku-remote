@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native';
-import RNFetchBlob from 'react-native-fetch-blob'
 const DOMParser = require('xmldom').DOMParser;
 import Config from 'react-native-config';
 
@@ -27,34 +26,6 @@ export const parseDeviceInfoResponse = (xml) => {
 export const getDeviceInfo = async (url) => fetch(`${url}query/device-info`, { method: 'GET' })
     .then(res => res.text())
     .then(xml => parseDeviceInfoResponse(xml));
-
-
-export const parseAppsResponse = (xml) => {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xml);
-    const appTag = xmlDoc.getElementsByTagName('app');
-    const channels = [];
-    for(var i = 0; i < appTag.length; i++){
-        const app = appTag[i];
-        const rokuApp = { name: app.childNodes[0].nodeValue };
-        for(var j = 0; j < app.attributes.length; j++) {
-            const attr = app.attributes[j];
-            rokuApp[attr.name] = attr.nodeValue;
-        }
-        channels.push(rokuApp);
-    }
-    return channels;
-};
-
-export const getChannels = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
-    .then(res => res.text())
-    .then(xml => parseAppsResponse(xml))
-    .then(channels => Promise.all(
-        channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
-            .then(res => res.base64())
-            .then(uri => ({ ...channel, icon: uri }))
-        )
-    ));
 
 const getQuery = () => {
     global.Buffer = global.Buffer || require('buffer').Buffer;

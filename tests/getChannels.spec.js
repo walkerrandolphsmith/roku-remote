@@ -1,4 +1,5 @@
-import { __RewireAPI__, getChannels } from './../src/onLoad';
+import getChannels from './../src/getChannels';
+import { __RewireAPI__ } from './../src/getChannels';
 import fetchMock from 'fetch-mock';
 import sinon from 'sinon';
 
@@ -16,7 +17,7 @@ describe('src/onLoad/getChannels', () => {
 
     afterEach(() => {
         fetchMock.restore();
-        __RewireAPI__.__ResetDependency__('parseAppsResponse');
+        __RewireAPI__.__ResetDependency__('convertToJson');
     });
 
     describe('Given a url', () => {
@@ -40,8 +41,8 @@ describe('src/onLoad/getChannels', () => {
     describe('Given a url', () => {
         beforeEach(() => {
             fetchMock.get('*', 'xml');
-            const parseAppsStub = sinon.stub().withArgs('xml').returns([]);
-            __RewireAPI__.__Rewire__('parseAppsResponse', parseAppsStub);
+            const convertToJsonStub = sinon.stub().withArgs('xml').returns([]);
+            __RewireAPI__.__Rewire__('convertToJson', convertToJsonStub);
         });
 
         describe('When retrieving the apps', () => {
@@ -59,7 +60,7 @@ describe('src/onLoad/getChannels', () => {
     describe('Given a url', () => {
         beforeEach(() => {
             fetchMock.get('*', 'xml');
-            __RewireAPI__.__Rewire__('parseAppsResponse', () => [
+            __RewireAPI__.__Rewire__('convertToJson', () => [
                 { id: 1 },
                 { id: 2 }
             ]);

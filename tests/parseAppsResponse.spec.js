@@ -1,17 +1,18 @@
-import { parseAppsResponse } from './../src/onLoad';
+import convertToJson from './../src/parseAppsResponse';
+const DOMParser = require('xmldom').DOMParser;
 
 describe('src/onLoad/parseAppResponse', () => {
     describe('Given xml response from querying app info', () => {
         let actual;
         let xml;
         beforeEach(() => {
-            xml = `
+            xml = new DOMParser().parseFromString(`
         <?xml version="1.0" encoding="UTF-8" ?>
         <apps>
             <app id="31012" type="menu" version="1.6.8">Movie Store and TV Store</app>
             <app id="12" type="appl" version="4.2.132">Netflix</app>
-        </apps>`;
-            actual = parseAppsResponse(xml);
+        </apps>`);
+            actual = convertToJson(xml);
         });
         it('should return an array', () => {
             expect(actual).to.be.instanceOf(Array);
