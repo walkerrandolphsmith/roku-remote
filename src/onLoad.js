@@ -46,18 +46,15 @@ export const parseAppsResponse = (xml) => {
     return channels;
 };
 
-export const getApps = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
+export const getChannels = async (url) => fetch(`${url}query/apps`, { method: 'GET' })
     .then(res => res.text())
-    .then(xml => parseAppsResponse(xml));
-
-export const getAppIcons = async (url, channels) => Promise.all(
-    channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
-        .then(res => res.base64())
-        .then(uri => ({ ...channel, icon: uri }))
-    )
-);
-
-export const getChannels = async (url) => getApps(url).then(channels => getAppIcons(url, channels));
+    .then(xml => parseAppsResponse(xml))
+    .then(channels => Promise.all(
+        channels.map(channel => RNFetchBlob.fetch('GET', `${url}query/icon/${channel.id}`)
+            .then(res => res.base64())
+            .then(uri => ({ ...channel, icon: uri }))
+        )
+    ));
 
 const getQuery = () => {
     global.Buffer = global.Buffer || require('buffer').Buffer;
