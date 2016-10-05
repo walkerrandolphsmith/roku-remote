@@ -85,16 +85,18 @@ describe('src/getChannels', () => {
         beforeEach(() => {
             xml = `
             <?xml version="1.0" encoding="UTF-8" ?>
-            <apps>
-                <app id="31012" type="menu" version="1.6.8">Movie Store and TV Store</app>
-            </apps>`;
+        <apps>
+            <app id="1" type="a" version="1">Hulu</app>
+            <app id="2" type="b" version="1">Netflix</app>
+        </apps>`;
             fetchMock.get('*', xml);
         });
 
         describe('When getting channels', () => {
             beforeEach((done) => {
                 expected = [
-                    {id: '31012', type: 'menu', version: '1.6.8', name: 'Movie Store and TV Store', icon: uri}
+                    {id: '1', type: 'a', version: '1', name: 'Hulu', icon: uri},
+                    {id: '2', type: 'b', version: '1', name: 'Netflix', icon: uri}
                 ];
                 getChannels(url).then(res => { actual = res; done(); });
             });

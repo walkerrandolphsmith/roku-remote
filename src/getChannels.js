@@ -1,20 +1,19 @@
 import RNFetchBlob from 'react-native-fetch-blob'
 import convertToXML from './convertToXML';
 
-export const convertToJson = (xml) => {
-    const appTag = xml.getElementsByTagName('app');
-    const channels = [];
-    for(var i = 0; i < appTag.length; i++){
-        const app = appTag[i];
-        const rokuApp = { name: app.childNodes[0].nodeValue };
-        for(var j = 0; j < app.attributes.length; j++) {
-            const attr = app.attributes[j];
-            rokuApp[attr.name] = attr.nodeValue;
-        }
-        channels.push(rokuApp);
-    }
-    return channels;
-};
+export const convertToJson = (xml) => Object
+    .keys(xml.getElementsByTagName('app'))
+    .filter(key => Number.isInteger(parseInt(key)))
+    .map(key => xml.getElementsByTagName('app')[key])
+    .reduce((channels, node) => channels.concat([
+        Object
+            .keys(node.attributes)
+            .filter(key => Number.isInteger(parseInt(key)))
+            .map(key => node.attributes[key])
+            .reduce((app, attr) => Object.assign(
+            app, { [attr.name]: attr.nodeValue }
+        ), { name: node.childNodes[0].nodeValue })
+    ]), []);
 
 export default async (url) => fetch(`${url}query/apps`, { method: 'GET' })
     .then(res => res.text())
