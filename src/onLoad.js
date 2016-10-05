@@ -2,41 +2,11 @@ import { AsyncStorage } from 'react-native';
 import Config from 'react-native-config';
 import getChannels from './getChannels';
 import getDeviceInfo from './getDeviceInfo';
+import search from './search';
 
 const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
 const STORAGE_KEY = IS_STORAGE_ENABLED ? '@RokuRemote:key' : '@RokuRemote:SAVE_DISABLED';
-
-const getQuery = () => {
-    global.Buffer = global.Buffer || require('buffer').Buffer;
-    const ssdpAddress = '239.255.255.250';
-    const ssdpPort = 1900;
-    const searchTarget = 'roku:ecp';
-    const queryString = `M-SEARCH * HTTP/1.1\r\nHOST: ${ssdpAddress}:${ssdpPort}\r\nMAN: "ssdp:discover"\r\nST: ${searchTarget}\r\nMX: 5\r\n\r\n`;
-    const query = new Buffer(queryString);
-
-    return (socket, cb) => socket.send(query, 0, query.length, ssdpPort, ssdpAddress, cb);
-};
-
-const search = async () => new Promise((resolve, reject) => {
-    const dgram = require('react-native-udp');
-    const client = dgram.createSocket('udp4');
-    const rokuUrls = [];
-
-    client.bind(12345);
-    client.once('listening', () => { getQuery()(client, () => setTimeout(() => client.close(), 3500)); });
-
-    client.on('message', (msg) => {
-        const matches = msg.toString().match(/Location: (.*)/i);
-        if(matches) {
-            const rokuUrl = matches[1];
-            rokuUrls.push(rokuUrl);
-        }
-    });
-
-    client.on('error', (err) => { reject(err); });
-    client.on('close', () => { resolve(rokuUrls); })
-});
 
 const findRokus = async () => {
     return search().then(rokus => {
