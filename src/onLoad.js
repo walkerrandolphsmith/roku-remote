@@ -3,6 +3,7 @@ import Config from 'react-native-config';
 import getChannels from './getChannels';
 import getDeviceInfo from './getDeviceInfo';
 import search from './search';
+import getState from './getState';
 
 const IS_STORAGE_ENABLED = (Config.IS_STORAGE_DISABLED || 1) === 1;
 
@@ -39,21 +40,10 @@ const getData = async () => {
     }
 };
 
-export const getHotButtons = (ids, channels) => channels.filter(channel => ids.includes(channel.id));
-
-export const getState = ({ channels, rokus }, getHotButtons) => ({
-    rokus: rokus,
-    url: rokus[0],
-    device: {
-        channels: channels,
-        hotButtons: getHotButtons(['12', '13', '46041', '2285'], channels)
-    }
-});
-
 export const onLoad = async () => {
     let state = await getData();
     if(!state.message && !state.fromStorage) {
-        state = getState(state, getHotButtons);
+        state = getState(state);
         if(IS_STORAGE_ENABLED) {
             AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         }
