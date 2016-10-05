@@ -1,9 +1,8 @@
-import getChannels from './../src/getChannels';
-import { __RewireAPI__ } from './../src/getChannels';
+import getChannels, { __RewireAPI__ } from './../../src/getChannels';
 import fetchMock from 'fetch-mock';
 import sinon from 'sinon';
 
-describe('src/onLoad/getChannels', () => {
+describe('src/getChannels', () => {
     let url, uri, expected, actual;
     beforeEach(() => {
         url = 'url/';

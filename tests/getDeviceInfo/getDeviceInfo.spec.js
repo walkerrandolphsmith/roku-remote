@@ -1,7 +1,7 @@
-import { getDeviceInfo } from './../src/onLoad';
+import getDeviceInfo from './../../src/getDeviceInfo';
 import fetchMock from 'fetch-mock';
 
-xdescribe('src/onLoad/getDeviceInfo', () => {
+xdescribe('src/getDeviceInfo', () => {
     describe('Given the root url', () => {
         let url, urlPattern;
         beforeEach(() => {

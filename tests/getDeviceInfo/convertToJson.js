@@ -1,11 +1,11 @@
-import parseDeviceInfoResponse from './../src/parseDeviceInfoResponse';
+import { convertToJson } from './../../src/getDeviceInfo';
 const DOMParser = require('xmldom').DOMParser;
 
-describe('src/onLoad/parseDeviceInfoResponse', () => {
+describe('src/getDeviceInfo/converToJson', () => {
     describe('Given xml from querying device info', () => {
         let xml;
         let actual;
-    
+
         beforeEach(() => {
             xml = new DOMParser().parseFromString(`
     <?xml version="1.0" encoding="UTF8" ?>
@@ -15,12 +15,12 @@ describe('src/onLoad/parseDeviceInfoResponse', () => {
     </device-info>
     `);
         });
-    
+
         describe('When parsing the device info into json', () => {
             beforeEach(() => {
-                actual = parseDeviceInfoResponse(xml);
+                actual = convertToJson(xml);
             });
-    
+
             it('Then it should create key value pairs for each xml node', () => {
                 const expected = {
                     'udn': '29a40003680710ef800f000000000000',

@@ -1,7 +1,7 @@
-import convertToJson from './../src/parseAppsResponse';
+import { convertToJson } from './../../src/getChannels';
 const DOMParser = require('xmldom').DOMParser;
 
-describe('src/onLoad/parseAppResponse', () => {
+describe('src/getChannels/convertToJson', () => {
     describe('Given xml response from querying app info', () => {
         let actual;
         let xml;
