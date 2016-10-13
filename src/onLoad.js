@@ -7,15 +7,14 @@ import getState from './getState';
 const STORAGE_KEY = '@RokuRemote:key';
 
 const findRokus = async () => {
-    return search().then(rokus => {
-        if(rokus.length > 0) {
-            return getChannels(rokus[0]).then(channels => ({ channels, rokus }))
-        } else {
-            return new Error('Error occured while talking with the roku.');
-        }
-    }).catch(() => {
+    try {
+        const rokus = await search();
+        return rokus.length > 0
+            ? getChannels(rokus[0]).then(channels => ({channels, rokus}))
+            : new Error('Error occured while talking with the roku.');
+    } catch(error) {
         return new Error('No rokus are found on the network.');
-    });
+    }
 };
 
 const getData = async () => {
