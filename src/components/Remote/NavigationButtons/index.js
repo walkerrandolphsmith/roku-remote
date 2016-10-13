@@ -1,12 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import {
-    DownButton,
-    LeftButton,
-    OkButton,
-    RightButton,
-    UpButton
-} from './../RemoteButtons';
+import { Button } from './../RemoteButton';
 
 const styles = StyleSheet.create({
     small: {
@@ -75,31 +69,31 @@ export class NavigationButtons extends React.Component {
             <View style={small}>
                 <View style={right}>
                     <View style={iconWrapper}>
-                        <RightButton url={url} />
+                        <Button name="Right" icon="angle-right" url={url} />
                     </View>
                 </View>
 
                 <View style={left}>
                     <View style={iconWrapper}>
-                        <LeftButton url={url} />
+                        <Button name="Left" icon="angle-left" url={url} />
                     </View>
                 </View>
 
                 <View style={okWrapper}>
                     <View style={ok}>
-                        <OkButton url={url} />
+                        <Button name="Select" icon="circle" url={url} />
                     </View>
                 </View>
 
                 <View style={up}>
                     <View style={iconWrapper}>
-                        <UpButton url={url} />
+                        <Button name="Up" icon="angle-up" url={url} />
                     </View>
                 </View>
 
                 <View style={down}>
                     <View style={iconWrapper}>
-                        <DownButton url={url} />
+                        <Button name="Down" icon="angle-down" url={url} />
                     </View>
                 </View>
             </View>

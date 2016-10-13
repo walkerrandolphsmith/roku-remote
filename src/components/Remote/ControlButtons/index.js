@@ -1,10 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-    FastForwardButton,
-    RewindButton,
-    PlayButton
-} from './../RemoteButtons';
+import { Button } from './../RemoteButton';
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -26,13 +22,13 @@ export class ControlButtons extends React.Component {
         return (
             <View style={styles.wrapper}>
                 <View>
-                    <RewindButton url={url} />
+                    <Button name="Rev" icon="backward" url={url} />
                 </View>
                 <View style={styles.play}>
-                    <PlayButton url={url} />
+                    <Button name="Play" icon="play" url={url} />
                 </View>
                 <View>
-                    <FastForwardButton url={url} />
+                    <Button name="Fwd" icon="forward" url={url} />
                 </View>
             </View>
         );

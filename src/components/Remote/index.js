@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { ControlButtons } from './ControlButtons';
 import { NavigationButtons } from './NavigationButtons';
-import { AsteriskButton, BackButton, HomeButton, SearchButton } from './RemoteButtons';
+import { Button } from './RemoteButton';
 import { HotButtons } from './HotButtons';
 
 const styles = StyleSheet.create({
@@ -58,23 +58,24 @@ const styles = StyleSheet.create({
 export class Remote extends React.Component {
     render(){
         const { device } = this.props;
+        const url = device.url;
         const { wrapper, large, topLeft, topRight, bottomLeft, bottomRight, controlButtons, hotButtons } = styles;
         return (
             <View>
                 <View style={wrapper}>
                     <View style={large}>
                         <View style={topLeft}>
-                            <BackButton url={device.url} />
+                            <Button name="Back" icon="long-arrow-left" url={url} />
                         </View>
                         <View style={topRight}>
-                            <HomeButton url={device.url} />
+                            <Button name="Home" icon="home" url={url} />
                         </View>
                         <NavigationButtons {...device} />
                         <View style={bottomLeft}>
-                            <SearchButton url={device.url} />
+                            <Button name="Search" icon="search" url={url} />
                         </View>
                         <View style={bottomRight}>
-                            <AsteriskButton url={device.url} />
+                            <Button name="" icon="asterisk" url={url} />
                         </View>
                     </View>
                 </View>
